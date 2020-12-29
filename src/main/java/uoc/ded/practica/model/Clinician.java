@@ -10,4 +10,19 @@ public class Clinician {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public Object getSurname() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getKnowledgeArea() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getIdClinician() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

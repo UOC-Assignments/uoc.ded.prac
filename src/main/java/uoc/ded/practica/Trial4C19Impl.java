@@ -22,8 +22,9 @@ public class Trial4C19Impl implements Trial4C19 {
         this.groups = new OrderedVector<QuestionGroup>(G, QuestionGroup.CMP);
         this.mostActiveTrial = null;
     }
-
-
+    
+    /* TO-DO: Modifiquem el mètode d'afegir usuaris per a contemplar els nous requeriments (atributs)*/ 
+    
     public void addUser(String idUser, String name, String surname) {
         User u = this.getUser(idUser);
         if (u != null) {
@@ -42,8 +43,6 @@ public class Trial4C19Impl implements Trial4C19 {
             this.trials[idTrial] = new Trial(idTrial, description);
             this.numTrials++;
         }
-
-
     }
 
     private QuestionGroup getQuestionGroup(String idQuestionGroup) {

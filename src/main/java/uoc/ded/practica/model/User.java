@@ -3,6 +3,7 @@ package uoc.ded.practica.model;
 import uoc.ei.tads.*;
 
 import java.util.Comparator;
+import java.util.Date;
 
 public class User implements Comparable<User>{
     public static final Comparator<String> CMP = new Comparator<String>() {
@@ -106,4 +107,16 @@ public class User implements Comparable<User>{
     public int numAnswers()  {
         return this.answers.nombreElems();
     }
+
+
+	public Object getLevel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Object years(Date now) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
