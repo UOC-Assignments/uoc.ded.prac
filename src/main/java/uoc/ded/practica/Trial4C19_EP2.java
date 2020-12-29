@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Definició del TAD de gestió de la plataforma d'assajos clínics
  */
-public interface Trial4C19 {
+public interface Trial4C19_EP2 {
 
 
     /**
