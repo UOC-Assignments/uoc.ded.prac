@@ -1,2 +1,0 @@
-# uoc.ded.prac
- 
