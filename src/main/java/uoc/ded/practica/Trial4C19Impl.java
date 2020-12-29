@@ -185,4 +185,146 @@ public class Trial4C19Impl implements Trial4C19 {
     }
 
 
+	@Override
+	public void addUser(String idUser, String name, String surname, Date birthday, Level level) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void addClinician(String idClinician, String name, String surname, String knowledgeArea) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Clinician getClinician(String idClinician) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void addLaboratory(String idLaboratory, String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Laboratory getLaboratory(String idLaboratory) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void newSample(String idSample, String idUser, String idClinician, Date date)
+			throws ClinicianNotFoundException, UserNotFoundException, TrialNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Sample sendSample(Date date) throws NOSAmplesException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Sample processSample(String idLaboratory, Date date, String report)
+			throws LaboratoryNotFoundException, NOSAmplesException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Iterador<Sample> samplesByTrial(int idTrial) throws TrialNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Iterador<Sample> samplesByUser(String idUser) throws UserNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Iterador<Sample> samplesByClinician(String idClinician) throws ClinicianNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Sample getSample(String idSample) throws SampleNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Clinician mostActiveClinician() throws NOClinicianException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int numClinician() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int numSamples() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int numSamplesByClinician(String idClinician) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int numSamplesByUser(String idUser) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int numSamplesByTrial(int idTrial) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int numPendingSamplesByLaboratory(String idLaboratory) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int numLaboratories() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 }
