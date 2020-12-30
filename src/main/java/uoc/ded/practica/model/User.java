@@ -2,6 +2,8 @@ package uoc.ded.practica.model;
 
 import uoc.ei.tads.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -15,10 +17,13 @@ public class User implements Comparable<User>{
     private String id;
     private String name;
     private String surname;
+    private Date birthday; /* UPGRADE: Atribut afegit per les noves especificacions indicades a la PAC2 */
+    private char level; /* UPGRADE: Atribut afegit per les noves especificacions indicades a la PAC2 */
     private boolean active;
     private LlistaEncadenada<Answer> answers;
     private Trial trial;
     private Cua<Question> questions;
+    private LlistaEncadenada<Sample> samples; /* UPGRADE: Afegim una LLISTA ENCADENADA DE MOSTRES per tal d'emmagatzemar les mostres de cada usuari */
 
     public User(String idUser, String name, String surname) {
         this.setId(idUser);
@@ -108,15 +113,17 @@ public class User implements Comparable<User>{
         return this.answers.nombreElems();
     }
 
-
-	public Object getLevel() {
-		// TODO Auto-generated method stub
-		return null;
+	public char getLevel() {
+		return this.level;
 	}
 
-
-	public Object years(Date now) {
-		// TODO Auto-generated method stub
-		return null;
+	/* Codi per a calcular la edat obtingut de -> https://www.baeldung.com/java-get-age */ 
+	
+	public int years(Date now) {
+	    DateFormat formatter = new SimpleDateFormat("yyyyMMdd");                           
+	    int d1 = Integer.parseInt(formatter.format(this.birthday));                            
+	    int d2 = Integer.parseInt(formatter.format(now));                          
+	    int age = (d2 - d1) / 10000;                                                       
+	    return age; 
 	}
 }

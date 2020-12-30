@@ -2,6 +2,9 @@ package uoc.ded.practica.model;
 
 public class Sample {
 	
+	private String idSample;
+	
+	
 	public Sample() {
 		//TO-DO
 	}
