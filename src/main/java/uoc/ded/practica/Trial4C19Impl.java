@@ -14,18 +14,25 @@ public class Trial4C19Impl implements Trial4C19 {
     private Trial[] trials;
     private OrderedVector<QuestionGroup> groups;
     private int numTrials;
-    private DiccionariAVLImpl<String, Sample> samples;
+    private CuaAmbPrioritat<Sample> pendingSamples;
+    private DiccionariAVLImpl<String, Sample> completedSamples;
     private TaulaDispersio<String, Clinician> clinicians;
     private Laboratory[] laboratories;
     private Trial mostActiveTrial;
+    private Clinician mostActiveClinician;
+    private Laboratory nextLaboratory;
 
     public Trial4C19Impl() {
         this.users = new DiccionariOrderedVector<String, User>(U, User.CMP);
         this.trials = new Trial[T];
         this.groups = new OrderedVector<QuestionGroup>(G, QuestionGroup.CMP);
-        this.samples = new DiccionariAVLImpl<String, Sample>();
+        this.pendingSamples = new CuaAmbPrioritat<Sample>();
+        this.completedSamples = new DiccionariAVLImpl<String, Sample>();
         this.clinicians = new TaulaDispersio<String, Clinician>();
+        this.laboratories = new Laboratory[L];
         this.mostActiveTrial = null;
+        this.mostActiveClinician = null;
+        this.nextLaboratory = null;
     }
     
     /* TO-DO: Modifiquem el mètode d'afegir usuaris per a contemplar els nous requeriments (atributs)*/ 
@@ -253,10 +260,10 @@ public class Trial4C19Impl implements Trial4C19 {
 			throw new TrialNotFoundException();
 		}
 		
-		/* Finalment podem procedir a afegir la nova mostra a l'arbre AVL de mostres */
+		/* Finalment podem procedir a afegir la nova mostra a la cua de mostres pendents (en estat PENDING) */
 		
 		Sample sample = new Sample(idSample,user,clinician,date);
-		this.samples.afegir(idSample,sample);
+		this.pendingSamples.encuar(sample);
 	}
 
 	@Override
