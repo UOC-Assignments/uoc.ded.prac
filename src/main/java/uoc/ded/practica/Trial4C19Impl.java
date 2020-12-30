@@ -213,15 +213,21 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public void addClinician(String idClinician, String name, String surname, String knowledgeArea) {
-		// TODO Auto-generated method stub
-		
+        Clinician c = this.getClinician(idClinician);
+        if (c != null) {
+            c.setName(name);
+            c.setSurname(surname);
+            c.setKnowledgeArea(knowledgeArea);
+        } else {
+            c = new Clinician(idClinician, name, surname, knowledgeArea);
+            this.clinicians.afegir(idClinician, c);
+        }		
 	}
 
 
 	@Override
 	public Clinician getClinician(String idClinician) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.clinicians.consultar(idClinician);
 	}
 
 
@@ -317,8 +323,7 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public int numClinician() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.clinicians.nombreElems();
 	}
 
 

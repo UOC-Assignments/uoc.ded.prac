@@ -10,15 +10,16 @@ public class Trial {
     private String description;
     private LlistaEncadenada<User> users;
     private OrderedVector<QuestionGroup> groups;
+    private LlistaEncadenada<Sample> samples;
     private User mostActiveUser;
     private int numAnswers;
-
 
     public Trial(int idTrial, String description) {
         this.idTrial = idTrial;
         this.description = description;
         this.users = new LlistaEncadenada<User>();
         this.groups = new OrderedVector<QuestionGroup>(Trial4C19.G, QuestionGroup.CMP);
+        this.samples = new LlistaEncadenada<Sample>();
         this.mostActiveUser = null;
     }
 

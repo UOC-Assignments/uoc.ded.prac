@@ -6,12 +6,12 @@ import uoc.ded.practica.Trial4C19;
 public class Laboratory {
 	private String idLaboratory;
 	private String name;
-	private CuaVectorImpl<Sample> sendedSamples;
+	private CuaVectorImpl<Sample> samples;
 	
 	public Laboratory(String idLaboratory, String name) {
 		this.setIdLaboratory(idLaboratory);
 		this.setName(name);
-		this.sendedSamples = new CuaVectorImpl<Sample>(Trial4C19.MAX_SAMPLES_LAB);
+		this.samples = new CuaVectorImpl<Sample>(Trial4C19.MAX_SAMPLES_LAB);
 	}
 
 	private String getIdLaboratory() {
