@@ -15,6 +15,7 @@ public class Trial4C19Impl implements Trial4C19 {
     private OrderedVector<QuestionGroup> groups;
     private int numTrials;
     private Trial mostActiveTrial;
+    private ArbreAVL<Sample> samples;
 
     public Trial4C19Impl() {
         this.users = new DiccionariOrderedVector<String, User>(U, User.CMP);
@@ -184,6 +185,7 @@ public class Trial4C19Impl implements Trial4C19 {
     }
 
     /* UPGRADE #1: Modifiquem el mètode d'afegir usuaris per a contemplar els nous requeriments (atributs) */ 
+    
 	@Override   
     public void addUser(String idUser, String name, String surname, Date birthday, Level level) {
         User u = this.getUser(idUser);
@@ -229,7 +231,8 @@ public class Trial4C19Impl implements Trial4C19 {
 	@Override
 	public void newSample(String idSample, String idUser, String idClinician, Date date)
 			throws ClinicianNotFoundException, UserNotFoundException, TrialNotFoundException {
-		// TODO Auto-generated method stub
+		Sample s = new Sample(idSample,);
+		this.samples.afegir(elemComp); 
 		
 	}
 

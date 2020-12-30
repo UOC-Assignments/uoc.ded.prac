@@ -10,19 +10,25 @@ public class Sample {
 	private String idSample;
 	private Status status;
 	private User user;
-	private String report;
+	private Clinician clinician;
 	private Date creationDate;
 	private Date shippingDate;
 	private Date completionDate;
+	private String report;
 	
-	public Sample(String idSample, Status status, User user, String report) {
+	public Sample(String idSample, User user, Clinician clinician, Date creationDate) {
 		this.setIdSample(idSample);
-		this.setStatus(status);
+		this.setStatus(Status.PENDING);
 		this.setUser(user);
+		this.setClinician(clinician);
 		this.setReport(report);
-		this.setDateCreation(now);
+		this.setDateCreation(creationDate);
 		this.setDateSended(null);
 		this.setDateCompleted(null);
+	}
+
+	private void setClinician(Clinician clinician) {
+		this.clinician = clinician;
 	}
 
 	private void setStatus(Status status) {
