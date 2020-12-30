@@ -15,6 +15,8 @@ public class Trial4C19Impl implements Trial4C19 {
     private OrderedVector<QuestionGroup> groups;
     private int numTrials;
     private DiccionariAVLImpl<String, Sample> samples;
+    private TaulaDispersio<String, Clinician> clinicians;
+    private Laboratory[] laboratories;
     private Trial mostActiveTrial;
 
     public Trial4C19Impl() {
@@ -22,6 +24,7 @@ public class Trial4C19Impl implements Trial4C19 {
         this.trials = new Trial[T];
         this.groups = new OrderedVector<QuestionGroup>(G, QuestionGroup.CMP);
         this.samples = new DiccionariAVLImpl<String, Sample>();
+        this.clinicians = new TaulaDispersio<String, Clinician>();
         this.mostActiveTrial = null;
     }
     
