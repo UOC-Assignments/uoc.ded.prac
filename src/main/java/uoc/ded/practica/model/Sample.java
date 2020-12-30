@@ -1,20 +1,26 @@
 package uoc.ded.practica.model;
 
+import uoc.ded.practica.Trial4C19;
+import uoc.ded.practica.Trial4C19.Status;
+
 public class Sample {
 	
 	private String idSample;
+	private Status status;
+	private String user;
+	private String report;
 	
 	
 	public Sample() {
 		//TO-DO
 	}
 
-	public Object getStatus() {
+	public Trial4C19.Status getStatus() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object getIdSample() {
+	public String getIdSample() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -24,7 +30,7 @@ public class Sample {
 		return null;
 	}
 
-	public Object getReport() {
+	public String getReport() {
 		// TODO Auto-generated method stub
 		return null;
 	}

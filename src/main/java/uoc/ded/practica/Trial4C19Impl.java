@@ -183,13 +183,20 @@ public class Trial4C19Impl implements Trial4C19 {
         return this.groups.elements();
     }
 
-
-	@Override
-	public void addUser(String idUser, String name, String surname, Date birthday, Level level) {
-		// TODO Auto-generated method stub
-		
-	}
-
+    /* UPGRADE #1: Modifiquem el mètode d'afegir usuaris per a contemplar els nous requeriments (atributs) */ 
+	@Override   
+    public void addUser(String idUser, String name, String surname, Date birthday, Level level) {
+        User u = this.getUser(idUser);
+        if (u != null) {
+            u.setName(name);
+            u.setSurname(surname);
+            u.setDateOfBirth(birthday);
+            u.setLevel(level);
+        } else {
+            u = new User(idUser, name, surname, birthday, level);
+            this.users.afegir(idUser, u);
+        }
+    }
 
 	@Override
 	public void addClinician(String idClinician, String name, String surname, String knowledgeArea) {
