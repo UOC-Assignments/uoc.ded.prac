@@ -1,11 +1,17 @@
 package uoc.ded.practica.model;
 
+import java.util.Comparator;
 import java.util.Date;
 
 import uoc.ded.practica.Trial4C19;
 import uoc.ded.practica.Trial4C19.Status;
 
-public class Sample {
+public class Sample implements Comparable<User>{
+    public static final Comparator<String> CMP = new Comparator<String>() {
+        public int compare(String o1, String o2) {
+            return o1.compareTo(o2);
+        }
+    } ;
 	
 	private String idSample;
 	private Status status;
@@ -86,4 +92,9 @@ public class Sample {
 	public Object getDateCompleted() {
 		return this.completionDate;
 	}
+
+	@Override
+    public int compareTo(User o) {
+        return this.getIdSample().compareTo(o.getId());
+    }
 }

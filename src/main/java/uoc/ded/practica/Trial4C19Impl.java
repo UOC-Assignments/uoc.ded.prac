@@ -14,13 +14,14 @@ public class Trial4C19Impl implements Trial4C19 {
     private Trial[] trials;
     private OrderedVector<QuestionGroup> groups;
     private int numTrials;
+    private DiccionariAVLImpl<String, Sample> samples;
     private Trial mostActiveTrial;
-    private ArbreAVL<Sample> samples;
 
     public Trial4C19Impl() {
         this.users = new DiccionariOrderedVector<String, User>(U, User.CMP);
         this.trials = new Trial[T];
         this.groups = new OrderedVector<QuestionGroup>(G, QuestionGroup.CMP);
+        this.samples = new DiccionariAVLImpl<String, Sample>();
         this.mostActiveTrial = null;
     }
     
@@ -231,18 +232,35 @@ public class Trial4C19Impl implements Trial4C19 {
 	@Override
 	public void newSample(String idSample, String idUser, String idClinician, Date date)
 			throws ClinicianNotFoundException, UserNotFoundException, TrialNotFoundException {
-		Sample s = new Sample(idSample,);
-		this.samples.afegir(elemComp); 
 		
+		/* Tal i com s'ha definit al contracte, el TAD serà responsable de comprovar que l'usuari 
+		 * i l'especialista i que l'usuari està assignat a un trial */
+		
+		User user = getUser(idUser);
+		if (user == null) {
+			throw new UserNotFoundException();
+		}
+		
+		Clinician clinician = getClinician(idClinician);
+		if (clinician == null) {
+			throw new ClinicianNotFoundException();
+		}
+		
+		if (user.getTrial()==null) {
+			throw new TrialNotFoundException();
+		}
+		
+		/* Finalment podem procedir a afegir la nova mostra a l'arbre AVL de mostres */
+		
+		Sample sample = new Sample(idSample,user,clinician,date);
+		this.samples.afegir(idSample,sample);
 	}
-
 
 	@Override
 	public Sample sendSample(Date date) throws NOSAmplesException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public Sample processSample(String idLaboratory, Date date, String report)
