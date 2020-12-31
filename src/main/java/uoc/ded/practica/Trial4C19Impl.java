@@ -15,13 +15,13 @@ public class Trial4C19Impl implements Trial4C19 {
     private OrderedVector<QuestionGroup> groups;
     private int numTrials;
     private int numLaboratories;
+    private int nextLaboratory;
     private CuaAmbPrioritat<Sample> pendingSamples;
     private DiccionariAVLImpl<String, Sample> completedSamples;
     private TaulaDispersio<String, Clinician> clinicians;
     private Laboratory[] laboratories;
     private Trial mostActiveTrial;
     private Clinician mostActiveClinician;
-    private Laboratory nextLaboratory;
 
     public Trial4C19Impl() {
         this.users = new DiccionariOrderedVector<String, User>(U, User.CMP);
@@ -33,10 +33,10 @@ public class Trial4C19Impl implements Trial4C19 {
         this.laboratories = new Laboratory[L];
         this.mostActiveTrial = null;
         this.mostActiveClinician = null;
-        this.nextLaboratory = null;
         
-        /* no cal inicialitzar numTrials ni numLaboratories ja que són variables 
-         * membres de classe Java --> https://stackoverflow.com/questions/19131336/default-values-and-initialization-in-java
+        /* no cal inicialitzar numTrials, numLaboratories ni nextLaboratory ja 
+         * que són variables membres de classe Java 
+         * --> https://stackoverflow.com/questions/19131336/default-values-and-initialization-in-java
          */
     }
         
@@ -237,9 +237,9 @@ public class Trial4C19Impl implements Trial4C19 {
 	public void addLaboratory(String idLaboratory, String name) {
 		
 		/* Primer hem de saber quina és la següent posició lliure del vector. 
-		 * A priori Ho podriem fer de dues maneres:
+		 * A priori ho podriem fer de dues maneres:
 		 * 
-		 * 1 - Amb eficiència temporal lineal fent un recorregut del vector, que 
+		 * #1 - Amb eficiència temporal lineal fent un recorregut del vector, que 
 		 * a la pràctica resulta ser insignificant ja que la quantitat de labs 
 		 * no passa de les desenes (fet que també ens assegura que la quantitat 
 		 * d'insercions será petita, és a dir, el recorregut de cost O(n) amb 
@@ -247,39 +247,56 @@ public class Trial4C19Impl implements Trial4C19 {
 		 * 
 		 *  O BÉ:
 		 *  
-		 *  2- Amb eficiència temporal constant O(1) Simplement afegint un nou 
+		 *  #2 - Amb eficiència temporal constant O(1) Simplement afegint un nou 
 		 *  atribut ""numLaboratories" al TAD Trial4C19 que mantindrem sempre 
 		 *  actualitzat amb el nombre de laboratoris total i que ens servirà per 
 		 *  a saber la posició del vector en la que hem d'afegir el laboratori 
 		 *  (la següent a la darrera).
 		 *  
 		 *   Obviament, escollirem la opció #2: */
-        int i = 0;
-        Boolean found = false;
+		
 		Laboratory l = this.getLaboratory(idLaboratory);
         if (l != null) {
             l.setName(name);
         } else {
             l = new Laboratory(idLaboratory, name);
-	        /* Afegim el laboratori a la darrera posició lliure del vector de laboratoris 
-	         * (l'ordre d'inserció estableix l'ordre en el que s'anirà rotant l'assignació 
-	         * del laboratori al que s'envien les mostres). */
-            this.laboratories[numLaboratories] = l;
+            
+	        /* Afegim el laboratori a la darrera posició lliure del vector de 
+	         * laboratoris (l'ordre d'inserció estableix l'ordre en el que 
+	         * s'anirà rotant l'assignació del laboratori al que s'envien les 
+	         * mostres). */
+            
+            this.laboratories[this.numLaboratories] = l;
+            
+            /* Actualitzem la quantitat de laboratoris total*/
+            
+            this.numLaboratories++;
         }			
 	}
 
 	@Override
 	public Laboratory getLaboratory(String idLaboratory) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		/* Cerquem el lab fent un recorregut amb O(n) -> temps lineal. Com hem
+		 * explicat en el cas de "addLaboratory" (opció 1), el cost realment 
+		 * serà insignificant */
+		
+		int n;
+		for (n=0;n<this.numLaboratories;n++) {
+			if (this.laboratories[n].getIdLaboratory().equals(idLaboratory)) {
+				return this.laboratories[n];
+			}
+		}
+		return null;		
 	}
 
 	@Override
 	public void newSample(String idSample, String idUser, String idClinician, Date date)
 			throws ClinicianNotFoundException, UserNotFoundException, TrialNotFoundException {
 		
-		/* Tal i com s'ha definit al contracte, el TAD serà responsable de comprovar que l'usuari 
-		 * i l'especialista i que l'usuari està assignat a un trial */
+		/* Tal i com s'ha definit al contracte, el TAD serà responsable de 
+		 * comprovar que l'usuari i l'especialista i que l'usuari està assignat 
+		 * a un trial */
 		
 		User user = getUser(idUser);
 		if (user == null) {
@@ -295,7 +312,8 @@ public class Trial4C19Impl implements Trial4C19 {
 			throw new TrialNotFoundException();
 		}
 		
-		/* Finalment podem procedir a afegir la nova mostra a la cua de mostres pendents (en estat PENDING) */
+		/* Finalment podem procedir a afegir la nova mostra a la cua de mostres 
+		 * pendents (en estat PENDING) */
 		
 		Sample sample = new Sample(idSample,user,clinician,date);
 		this.pendingSamples.encuar(sample);
@@ -393,9 +411,16 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public int numLaboratories() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.numLaboratories;
 	}
 
-
 }
+
+/****
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
