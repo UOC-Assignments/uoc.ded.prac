@@ -287,7 +287,7 @@ public class Trial4C19Impl implements Trial4C19 {
 				return this.laboratories[n];
 			}
 		}
-		return null;		
+		return null;
 	}
 
 	@Override
@@ -413,14 +413,36 @@ public class Trial4C19Impl implements Trial4C19 {
 	public int numLaboratories() {
 		return this.numLaboratories;
 	}
-
-}
+	
 
 /****
  * 
  * 
+ * 	AIXO POT SER EL MÈTODE DE SELECCIONAR SEGÜENT LAB PER A ENVIAR LA MOSTRA 
  * 
- * 
- * 
+ *  --> Sample sendSample(date);
+ *  
+ *  On el paràmetre d'entrada laboratoryID correspon al valor rebut --> this.laboratories[nextLabo].getIdLabo()
  * 
  */
+	
+	public Object XXXXXXXXX(String XXXXXXXX) {
+		
+		/* Desem l'index (següent lab a enviar mostres) a la var auxiliar "n", 
+		 * ja que hem d'actualitzar el valor de "nextLaboratory" abans de 
+		 * retornar el valor */
+		int n = this.nextLaboratory;
+		if (this.nextLaboratory == this.numLaboratories) {
+			/* Si el següent laboratori és el darrer del vector, actualitzem 
+			 * l'index "nextLaboratory" per a que apunti al primer element del 
+			 * vector (implementació de recorregut circular) */
+			this.nextLaboratory = 0;
+		}
+		else {
+			/* Si no, alehores incrementem el valor per a apuntar a la següent 
+			 * posició del vector*/
+			this.nextLaboratory++;
+		}
+		return this.laboratories[n];
+	}
+}
