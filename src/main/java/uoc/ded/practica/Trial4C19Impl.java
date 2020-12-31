@@ -14,6 +14,7 @@ public class Trial4C19Impl implements Trial4C19 {
     private Trial[] trials;
     private OrderedVector<QuestionGroup> groups;
     private int numTrials;
+    private int numLaboratories;
     private CuaAmbPrioritat<Sample> pendingSamples;
     private DiccionariAVLImpl<String, Sample> completedSamples;
     private TaulaDispersio<String, Clinician> clinicians;
@@ -33,10 +34,12 @@ public class Trial4C19Impl implements Trial4C19 {
         this.mostActiveTrial = null;
         this.mostActiveClinician = null;
         this.nextLaboratory = null;
+        
+        /* no cal inicialitzar numTrials ni numLaboratories ja que són variables 
+         * membres de classe Java --> https://stackoverflow.com/questions/19131336/default-values-and-initialization-in-java
+         */
     }
-    
-    /* TO-DO: Modifiquem el mètode d'afegir usuaris per a contemplar els nous requeriments (atributs)*/ 
-    
+        
     public void addUser(String idUser, String name, String surname) {
         User u = this.getUser(idUser);
         if (u != null) {
@@ -46,7 +49,22 @@ public class Trial4C19Impl implements Trial4C19 {
             u = new User(idUser, name, surname);
             this.users.afegir(idUser, u);
         }
-
+    }
+    
+    /* UPGRADE #1: Modifiquem el mètode d'afegir usuaris per a contemplar els nous requeriments (atributs) */ 
+    
+	@Override   
+    public void addUser(String idUser, String name, String surname, Date birthday, Level level) {
+        User u = this.getUser(idUser);
+        if (u != null) {
+            u.setName(name);
+            u.setSurname(surname);
+            u.setDateOfBirth(birthday);
+            u.setLevel(level);
+        } else {
+            u = new User(idUser, name, surname, birthday, level);
+            this.users.afegir(idUser, u);
+        }
     }
 
     public void addTrial(int idTrial, String description) throws TrialAlreadyExistsException {
@@ -195,22 +213,6 @@ public class Trial4C19Impl implements Trial4C19 {
         return this.groups.elements();
     }
 
-    /* UPGRADE #1: Modifiquem el mètode d'afegir usuaris per a contemplar els nous requeriments (atributs) */ 
-    
-	@Override   
-    public void addUser(String idUser, String name, String surname, Date birthday, Level level) {
-        User u = this.getUser(idUser);
-        if (u != null) {
-            u.setName(name);
-            u.setSurname(surname);
-            u.setDateOfBirth(birthday);
-            u.setLevel(level);
-        } else {
-            u = new User(idUser, name, surname, birthday, level);
-            this.users.afegir(idUser, u);
-        }
-    }
-
 	@Override
 	public void addClinician(String idClinician, String name, String surname, String knowledgeArea) {
         Clinician c = this.getClinician(idClinician);
@@ -233,17 +235,44 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public void addLaboratory(String idLaboratory, String name) {
-		// TODO Auto-generated method stub
 		
+		/* Primer hem de saber quina és la següent posició lliure del vector. 
+		 * A priori Ho podriem fer de dues maneres:
+		 * 
+		 * 1 - Amb eficiència temporal lineal fent un recorregut del vector, que 
+		 * a la pràctica resulta ser insignificant ja que la quantitat de labs 
+		 * no passa de les desenes (fet que també ens assegura que la quantitat 
+		 * d'insercions será petita, és a dir, el recorregut de cost O(n) amb 
+		 * n < 100 s'efectuarà molt poques vegades.
+		 * 
+		 *  O BÉ:
+		 *  
+		 *  2- Amb eficiència temporal constant O(1) Simplement afegint un nou 
+		 *  atribut ""numLaboratories" al TAD Trial4C19 que mantindrem sempre 
+		 *  actualitzat amb el nombre de laboratoris total i que ens servirà per 
+		 *  a saber la posició del vector en la que hem d'afegir el laboratori 
+		 *  (la següent a la darrera).
+		 *  
+		 *   Obviament, escollirem la opció #2: */
+        int i = 0;
+        Boolean found = false;
+		Laboratory l = this.getLaboratory(idLaboratory);
+        if (l != null) {
+            l.setName(name);
+        } else {
+            l = new Laboratory(idLaboratory, name);
+	        /* Afegim el laboratori a la darrera posició lliure del vector de laboratoris 
+	         * (l'ordre d'inserció estableix l'ordre en el que s'anirà rotant l'assignació 
+	         * del laboratori al que s'envien les mostres). */
+            this.laboratories[numLaboratories] = l;
+        }			
 	}
-
 
 	@Override
 	public Laboratory getLaboratory(String idLaboratory) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public void newSample(String idSample, String idUser, String idClinician, Date date)
