@@ -388,8 +388,9 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public Sample getSample(String idSample) throws SampleNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		Sample s = this.completedSamples.consultar(idSample);
+		if (s == null) throw new SampleNotFoundException();
+		else return s;
 	}
 
 

@@ -33,12 +33,12 @@ public class Sample implements Comparable<Sample>{
 		this.setDateCompleted(null);
 	}
 
-	public void setClinician(Clinician clinician) {
-		this.clinician = clinician;
+	public void setClinician(Clinician c) {
+		this.clinician = c;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setStatus(Status s) {
+		this.status = s;
 	}
 
 	public Status getStatus() {
@@ -61,32 +61,32 @@ public class Sample implements Comparable<Sample>{
 		return this.user;
 	}
 	
-	public void setReport(String report) {
-		this.report = report;
+	public void setReport(String r) {
+		this.report = r;
 	}
 
 	public String getReport() {
 		return this.report;
 	}
 	
-	public void setDateCreation(Date date) {
-		this.creationDate = date;
+	public void setDateCreation(Date d) {
+		this.creationDate = d;
 	}
 
 	public Date getDateCreation() {
 		return this.creationDate;
 	}
 	
-	private void setDateSended(Date date) {
-		this.shippingDate = date;
+	private void setDateSended(Date d) {
+		this.shippingDate = d;
 	}
 	
 	public Date getDateSended() {
 		return this.shippingDate;
 	}
 	
-	public void setDateCompleted(Date date) {
-		this.completionDate = date;
+	public void setDateCompleted(Date d) {
+		this.completionDate = d;
 	}
 
 	public Date getDateCompleted() {
