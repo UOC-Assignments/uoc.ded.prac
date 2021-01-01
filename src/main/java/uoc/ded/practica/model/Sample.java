@@ -9,8 +9,10 @@ import uoc.ded.practica.util.DateUtils;
 
 public class Sample implements Comparable<Sample>{
     public static final Comparator<Sample> CMP = new Comparator<Sample>() {
-		public int compare(Sample o1, Sample o2) {
-	           return o1.compareTo(o2);
+		
+    	public int compare(Sample o1, Sample o2) {
+	           int res = o1.user.getLevel().compareTo(o2.user.getLevel());
+	           return res;
 		}
     };
 	
@@ -96,11 +98,13 @@ public class Sample implements Comparable<Sample>{
 
     public int compareTo(Sample s) {
     	Date now = createDate("16-12-2020 11:30:00");
-    	//AQUI ESTEM COMPARANT NOMÉS PER LEVEL I TAMBÉ S'HA DE TENIR EN COMPTE LA EDAT (REVISAR!!)
-        int level = this.user.getLevel().compareTo(s.user.getLevel());  
-        int age = this.user.years(now);
-        System.out.printf("level: local sample (this) is %d than input parameter sample (s)\n",level);
-        return level + age;
+    	int age_CMP = 0;
+    	
+    	/* Primer comparem per nivell de gravetat i desem el resultat a la var 
+    	 * "level_CMP" (utilitzem el mètode compareTo de la classe String)*/
+    	
+        return this.user.getLevel().compareTo(s.user.getLevel()); 
+        
     }
     
     private Date createDate(String date) {
