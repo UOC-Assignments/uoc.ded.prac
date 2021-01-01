@@ -16,8 +16,8 @@ public class Trial4C19Impl implements Trial4C19 {
     private int numTrials;
     private int numLaboratories;
     private int nextLaboratory;
+    private DiccionariAVLImpl<String, Sample> samples;
     private CuaAmbPrioritat<Sample> pendingSamples;
-    private DiccionariAVLImpl<String, Sample> completedSamples;
     private TaulaDispersio<String, Clinician> clinicians;
     private Laboratory[] laboratories;
     private Trial mostActiveTrial;
@@ -33,8 +33,8 @@ public class Trial4C19Impl implements Trial4C19 {
          * paràmetre (capacitat màxima, per defecte) i elements d'una classe 
          * comparable amb el comparador donat.
          * */
+        this.samples = new DiccionariAVLImpl<String, Sample>();
         this.pendingSamples = new CuaAmbPrioritat<Sample>(Sample.CMP);
-        this.completedSamples = new DiccionariAVLImpl<String, Sample>();
         this.clinicians = new TaulaDispersio<String, Clinician>();
         this.laboratories = new Laboratory[L];
         this.mostActiveTrial = null;
@@ -326,11 +326,12 @@ public class Trial4C19Impl implements Trial4C19 {
 			throw new TrialNotFoundException();
 		}
 		
-		/* Ara podem procedir a afegir la nova mostra a la cua de mostres global
-		 * (en estat PENDING), així com a les estructures corresponents pel que 
-		 * respecta als usuaris, especialistes i assaigs. */
+		/* Ara podem procedir a afegir la nova mostra a l'arbre AVL de mostres global,
+		 * a la cua de mostres en estat PENDING, així com a les estructures 
+		 * corresponents pel que respecta als usuaris, especialistes i assaigs. */
 		
 		Sample s = new Sample(idSample,user,clinician,date);
+		this.samples.afegir(idSample, s);
 		this.pendingSamples.encuar(s);
 		clinician.addSample(s);
 		user.addSample(s);
@@ -388,7 +389,7 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public Sample getSample(String idSample) throws SampleNotFoundException {
-		Sample s = this.completedSamples.consultar(idSample);
+		Sample s = this.samples.consultar(idSample);
 		if (s == null) throw new SampleNotFoundException();
 		else return s;
 	}
