@@ -6,12 +6,12 @@ import java.util.Date;
 import uoc.ded.practica.Trial4C19;
 import uoc.ded.practica.Trial4C19.Status;
 
-public class Sample implements Comparable<User>{
-    public static final Comparator<String> CMP = new Comparator<String>() {
-        public int compare(String o1, String o2) {
-            return o1.compareTo(o2);
-        }
-    } ;
+public class Sample implements Comparable<Sample>{
+    public static final Comparator<Sample> CMP = new Comparator<Sample>() {
+		public int compare(Sample o1, Sample o2) {
+	           return o1.compareTo(o2);
+		}
+    };
 	
 	private String idSample;
 	private Status status;
@@ -73,7 +73,7 @@ public class Sample implements Comparable<User>{
 		this.creationDate = date;
 	}
 
-	public Object getDateCreation() {
+	public Date getDateCreation() {
 		return this.creationDate;
 	}
 	
@@ -89,12 +89,12 @@ public class Sample implements Comparable<User>{
 		this.completionDate = date;
 	}
 
-	public Object getDateCompleted() {
+	public Date getDateCompleted() {
 		return this.completionDate;
 	}
 
-	@Override
-    public int compareTo(User o) {
-        return this.getIdSample().compareTo(o.getId());
+    public int compareTo(Sample s) {
+    	//AQUI ESTEM COMPARANT NOMÉS PER LEVEL I TAMBÉ S'HA DE TENIR EN COMPTE LA EDAT (REVISAR!!)
+        return this.user.getLevel().compareTo(s.user.getLevel());         
     }
 }

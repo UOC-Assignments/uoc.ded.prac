@@ -68,4 +68,12 @@ public class Trial {
         if (this.mostActiveUser == null) this.mostActiveUser = user;
         else if (this.mostActiveUser.numAnswers()<user.numAnswers()) this.mostActiveUser = user;
     }
+    
+    public void addSample(Sample s) {
+    	this.samples.afegirAlFinal(s);
+    }
+
+	public int getNumSamples() {
+		return this.samples.nombreElems();
+	}
 }

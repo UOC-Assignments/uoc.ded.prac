@@ -48,4 +48,12 @@ public class Clinician {
 	public void setKnowledgeArea(String knowledgeArea) {
 		this.knowledgeArea = knowledgeArea;
 	}
+	
+	public int getNumSamples() {
+		return this.samples.nombreElems();
+	}
+	
+	public void addSample(Sample s) {
+		this.samples.afegirAlFinal(s);
+	}
 }

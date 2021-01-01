@@ -154,4 +154,14 @@ public class User implements Comparable<User>{
 	    int age = (d2 - d1) / 10000;                                                       
 	    return age; 
 	}
+	
+	/* UPGRADE #6: Mètode per a afegir una nova mostra extreta a l'usuari */
+	
+	public void addSample(Sample s) {
+		this.samples.afegirAlFinal(s);
+	}
+
+	public int getNumSamples() {
+		return this.samples.nombreElems();
+	}
 }

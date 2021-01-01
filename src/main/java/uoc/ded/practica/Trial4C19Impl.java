@@ -27,7 +27,13 @@ public class Trial4C19Impl implements Trial4C19 {
         this.users = new DiccionariOrderedVector<String, User>(U, User.CMP);
         this.trials = new Trial[T];
         this.groups = new OrderedVector<QuestionGroup>(G, QuestionGroup.CMP);
-        this.pendingSamples = new CuaAmbPrioritat<Sample>();
+        /*
+         * Per a la cua amb prioritat on desarem les mostres pendents, del TAD 
+         * "CuaAmbPrioritat()" de la biblioteca utilitzarem el Constructor amb un 
+         * paràmetre (capacitat màxima, per defecte) i elements d'una classe 
+         * comparable amb el comparador donat.
+         * */
+        this.pendingSamples = new CuaAmbPrioritat<Sample>(Sample.CMP);
         this.completedSamples = new DiccionariAVLImpl<String, Sample>();
         this.clinicians = new TaulaDispersio<String, Clinician>();
         this.laboratories = new Laboratory[L];
@@ -248,12 +254,15 @@ public class Trial4C19Impl implements Trial4C19 {
 		 *  O BÉ:
 		 *  
 		 *  #2 - Amb eficiència temporal constant O(1) Simplement afegint un nou 
-		 *  atribut ""numLaboratories" al TAD Trial4C19 que mantindrem sempre 
+		 *  atribut "numLaboratories" al TAD Trial4C19 que mantindrem sempre 
 		 *  actualitzat amb el nombre de laboratoris total i que ens servirà per 
 		 *  a saber la posició del vector en la que hem d'afegir el laboratori 
-		 *  (la següent a la darrera).
+		 *  (la següent a la darrera, ja que no eliminarem mai laboratoris i les 
+		 *  posicions del vector utilitzades són contigues).
 		 *  
-		 *   Obviament, escollirem la opció #2: */
+		 *  Obviament, escollirem la opció #2 ja que el cost espacial d'emmagatzemar
+		 *  numLaboratory és insignificant i la millora en eficiència temporal és 
+		 *  substancial respecte de la obtinguda amb la opció #1. */
 		
 		Laboratory l = this.getLaboratory(idLaboratory);
         if (l != null) {
@@ -278,7 +287,7 @@ public class Trial4C19Impl implements Trial4C19 {
 	public Laboratory getLaboratory(String idLaboratory) {
 		
 		/* Cerquem el lab fent un recorregut amb O(n) -> temps lineal. Com hem
-		 * explicat en el cas de "addLaboratory" (opció 1), el cost realment 
+		 * explicat en el cas de "addLaboratory" (opció #1), el cost realment 
 		 * serà insignificant */
 		
 		int n;
@@ -302,26 +311,45 @@ public class Trial4C19Impl implements Trial4C19 {
 		 * mentre que a l'enunciat de la PRAC no --> Preguntar al fòrum 
 		 * */
 		
-		User user = getUser(idUser);
+		User user = this.getUser(idUser);
 		if (user == null) {
 			throw new UserNotFoundException();
 		}
 		
-		Clinician clinician = getClinician(idClinician);
+		Clinician clinician = this.getClinician(idClinician);
 		if (clinician == null) {
 			throw new ClinicianNotFoundException();
 		}
 		
-		if (user.getTrial()==null) {
+		Trial trial = user.getTrial();
+		if (trial==null) {
 			throw new TrialNotFoundException();
 		}
 		
-		/* Finalment podem procedir a afegir la nova mostra a la cua de mostres 
-		 * pendents (en estat PENDING) */
+		/* Ara podem procedir a afegir la nova mostra a la cua de mostres global
+		 * (en estat PENDING), així com a les estructures corresponents pel que 
+		 * respecta als usuaris, especialistes i assaigs. */
 		
-		Sample sample = new Sample(idSample,user,clinician,date);
-		this.pendingSamples.encuar(sample);
+		Sample s = new Sample(idSample,user,clinician,date);
+		this.pendingSamples.encuar(s);
+		clinician.addSample(s);
+		user.addSample(s);
+		trial.addSample(s);
+		
+		/* Finalment no hem d'oblidar comprovar si cal actualitzar l'especialista més 
+		 * actiu. Utilitzarem el mètode auxiliar "updateMostActiveClinician()" 
+		 * implementat més avall */
+		
+		updateMostActiveClinician(clinician);
+		
 	}
+	
+	/* CUSTOM / AUX METHOD */
+    public void updateMostActiveClinician(Clinician c) {
+        if (this.mostActiveClinician == null) this.mostActiveClinician = c;
+        else if ( this.mostActiveClinician.getNumSamples() < c.getNumSamples() ) this.mostActiveClinician = c;
+    }
+
 
 	@Override
 	public Sample sendSample(Date date) throws NOSAmplesException {
@@ -367,8 +395,12 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public Clinician mostActiveClinician() throws NOClinicianException {
-		// TODO Auto-generated method stub
-		return null;
+		if (this.mostActiveClinician==null) {
+			throw new NOClinicianException();
+		}
+		else {
+			return this.mostActiveClinician;
+		}
 	}
 
 
@@ -380,29 +412,25 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public int numSamples() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.pendingSamples.nombreElems();
 	}
 
 
 	@Override
 	public int numSamplesByClinician(String idClinician) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.clinicians.consultar(idClinician).getNumSamples();
 	}
 
 
 	@Override
 	public int numSamplesByUser(String idUser) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.users.consultar(idUser).getNumSamples();
 	}
 
 
 	@Override
 	public int numSamplesByTrial(int idTrial) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.trials[idTrial].getNumSamples();
 	}
 
 
