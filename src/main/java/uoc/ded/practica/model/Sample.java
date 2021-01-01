@@ -33,11 +33,11 @@ public class Sample implements Comparable<User>{
 		this.setDateCompleted(null);
 	}
 
-	private void setClinician(Clinician clinician) {
+	public void setClinician(Clinician clinician) {
 		this.clinician = clinician;
 	}
 
-	private void setStatus(Status status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
@@ -45,7 +45,7 @@ public class Sample implements Comparable<User>{
 		return this.status;
 	}
 
-	private void setIdSample(String idSample) {
+	public void setIdSample(String idSample) {
 		this.idSample = idSample;
 	}
 
@@ -53,7 +53,7 @@ public class Sample implements Comparable<User>{
 		return this.idSample;
 	}
 	
-	private void setUser(User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
@@ -61,7 +61,7 @@ public class Sample implements Comparable<User>{
 		return this.user;
 	}
 	
-	private void setReport(String report) {
+	public void setReport(String report) {
 		this.report = report;
 	}
 
@@ -69,7 +69,7 @@ public class Sample implements Comparable<User>{
 		return this.report;
 	}
 	
-	private void setDateCreation(Date date) {
+	public void setDateCreation(Date date) {
 		this.creationDate = date;
 	}
 
@@ -85,7 +85,7 @@ public class Sample implements Comparable<User>{
 		return this.shippingDate;
 	}
 	
-	private void setDateCompleted(Date date) {
+	public void setDateCompleted(Date date) {
 		this.completionDate = date;
 	}
 

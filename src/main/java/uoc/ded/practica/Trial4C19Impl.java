@@ -296,7 +296,11 @@ public class Trial4C19Impl implements Trial4C19 {
 		
 		/* Tal i com s'ha definit al contracte, el TAD serà responsable de 
 		 * comprovar que l'usuari i l'especialista i que l'usuari està assignat 
-		 * a un trial */
+		 * a un trial 
+		 * 
+		 * OBSERVACIÓ IMPORTANT: A La PAC2 "newSample" reb com a paràmetre "TrialID" 
+		 * mentre que a l'enunciat de la PRAC no --> Preguntar al fòrum 
+		 * */
 		
 		User user = getUser(idUser);
 		if (user == null) {
