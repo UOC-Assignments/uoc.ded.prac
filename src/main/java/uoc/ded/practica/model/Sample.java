@@ -77,7 +77,7 @@ public class Sample implements Comparable<Sample>{
 		return this.creationDate;
 	}
 	
-	private void setDateSended(Date d) {
+	public void setDateSended(Date d) {
 		this.shippingDate = d;
 	}
 	

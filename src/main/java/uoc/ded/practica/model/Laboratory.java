@@ -29,4 +29,8 @@ public class Laboratory {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public void addSample(Sample s) {
+		this.samples.encuar(s);
+	}
 }

@@ -351,11 +351,47 @@ public class Trial4C19Impl implements Trial4C19 {
         else if ( this.mostActiveClinician.getNumSamples() < c.getNumSamples() ) this.mostActiveClinician = c;
     }
 
-
 	@Override
 	public Sample sendSample(Date date) throws NOSAmplesException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		/* En primer lloc obtenim (desencuem) la mostra més prioritària de la cua de 
+		 * mostres pendents d'enviar i la desem a una variable local */
+		
+		Sample s = this.pendingSamples.desencuar();
+		
+		/* Si no hi ha cap mostra a la cua hem d'informar de l'error */
+		
+		if (s == null) {
+			throw new NOSAmplesException();
+		}
+		
+		/* Si hem pogut obtenir la següent mostra a enviar, la hem d'assignar a la 
+		 * cua FIFO de mostres enviades (estat "SENDED") del següent laboratori en el 
+		 * circuit de rotacions. Abans però, caldrà establir el nou estat de la mostra 
+		 * i afegir la data d'enviment de la mateixa */
+		
+		s.setStatus(Status.SENDED);
+		s.setDateSended(date);
+		System.out.printf("%d\n",this.nextLaboratory); //DEBUG
+		this.laboratories[this.nextLaboratory].addSample(s);
+				
+		/* Finalment caldrà actualitzar l'apuntador al següent laboratory */
+				
+		if (this.nextLaboratory == this.numLaboratories-1) {
+			/* Si el laboratori actual és el darrer del vector, actualitzem 
+			 * l'index "nextLaboratory" per a que apunti al primer element del 
+			 * vector (implementació de recorregut circular) */
+			this.nextLaboratory = 0;
+		}
+		else {
+			/* Si no, aleshores incrementem el valor per a apuntar a la següent 
+			 * posició del vector*/
+			this.nextLaboratory++;
+		}
+		
+		/* No hem d'oblidar que el mètode ha de retornar la mostra enviada */
+		
+		return s;
 	}
 
 	@Override
@@ -447,36 +483,5 @@ public class Trial4C19Impl implements Trial4C19 {
 	public int numLaboratories() {
 		return this.numLaboratories;
 	}
-	
 
-/****
- * 
- * 
- * 	AIXO POT SER EL MÈTODE DE SELECCIONAR SEGÜENT LAB PER A ENVIAR LA MOSTRA 
- * 
- *  --> Sample sendSample(date);
- *  
- *  On el paràmetre d'entrada laboratoryID correspon al valor rebut --> this.laboratories[nextLabo].getIdLabo()
- * 
- */
-	
-	public Object XXXXXXXXX(String XXXXXXXX) {
-		
-		/* Desem l'index (següent lab a enviar mostres) a la var auxiliar "n", 
-		 * ja que hem d'actualitzar el valor de "nextLaboratory" abans de 
-		 * retornar el valor */
-		int n = this.nextLaboratory;
-		if (this.nextLaboratory == this.numLaboratories) {
-			/* Si el següent laboratori és el darrer del vector, actualitzem 
-			 * l'index "nextLaboratory" per a que apunti al primer element del 
-			 * vector (implementació de recorregut circular) */
-			this.nextLaboratory = 0;
-		}
-		else {
-			/* Si no, alehores incrementem el valor per a apuntar a la següent 
-			 * posició del vector*/
-			this.nextLaboratory++;
-		}
-		return this.laboratories[n];
-	}
 }
