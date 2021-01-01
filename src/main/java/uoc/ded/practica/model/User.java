@@ -77,10 +77,6 @@ public class User implements Comparable<User>{
     }
 
 
-    public int compareTo(User o) {
-        return this.getId().compareTo(o.getId());
-    }
-
     public void setActive() {
         this.active = true;
     }
@@ -164,4 +160,8 @@ public class User implements Comparable<User>{
 	public int getNumSamples() {
 		return this.samples.nombreElems();
 	}
+	
+    public int compareTo(User o) {
+        return this.getId().compareTo(o.getId());
+    }
 }

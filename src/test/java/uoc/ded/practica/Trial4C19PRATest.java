@@ -263,8 +263,6 @@ public class Trial4C19PRATest {
         this.trial4C19.newSample("sample1", "idUser1", "idClinicianXXX", createDate("15-12-2020 16:20:00"));
     }
 
-
-
     private Date createDate(String date) {
         return DateUtils.createDate(date);
     }

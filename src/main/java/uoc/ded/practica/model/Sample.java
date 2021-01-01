@@ -5,6 +5,7 @@ import java.util.Date;
 
 import uoc.ded.practica.Trial4C19;
 import uoc.ded.practica.Trial4C19.Status;
+import uoc.ded.practica.util.DateUtils;
 
 public class Sample implements Comparable<Sample>{
     public static final Comparator<Sample> CMP = new Comparator<Sample>() {
@@ -94,7 +95,15 @@ public class Sample implements Comparable<Sample>{
 	}
 
     public int compareTo(Sample s) {
+    	Date now = createDate("16-12-2020 11:30:00");
     	//AQUI ESTEM COMPARANT NOMÉS PER LEVEL I TAMBÉ S'HA DE TENIR EN COMPTE LA EDAT (REVISAR!!)
-        return this.user.getLevel().compareTo(s.user.getLevel());         
+        int level = this.user.getLevel().compareTo(s.user.getLevel());  
+        int age = this.user.years(now);
+        System.out.printf("level: local sample (this) is %d than input parameter sample (s)\n",level);
+        return level + age;
+    }
+    
+    private Date createDate(String date) {
+        return DateUtils.createDate(date);
     }
 }
