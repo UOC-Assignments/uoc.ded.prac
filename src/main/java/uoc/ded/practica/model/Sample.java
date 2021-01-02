@@ -40,12 +40,11 @@ public class Sample implements Comparable<Sample>{
 	        * casos) -> return -1
 	        * */
 
-	       if (level_CMP > 0) { 
-	    	   return 1;
-	       } else if (level_CMP == 0) { 
-	    	  if (age_CMP > 0) return 1;
-	    	  if (age_CMP == 0) return 0;
-	    	  //if (age_CMP < 0) return -1; //Aquest retorn a la pràctica és redundant
+	       if (level_CMP > 0) return 1;
+    	   else if (level_CMP == 0) { 
+    		   if (age_CMP > 0) return 1;
+    		   if (age_CMP == 0) return 0;
+    	   //if (age_CMP < 0) return -1; //Aquest retorn és redundant
 	       } 
 	       return -1;
 		}
