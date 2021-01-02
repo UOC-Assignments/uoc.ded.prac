@@ -12,7 +12,8 @@ import uoc.ei.tads.Iterador;
 import java.util.Date;
 
 public class Trial4C19PRATest {
-
+	
+	private static final Date now = DateUtils.createDate("01-01-2021 00:00:00"); //AIXÒ ESTA FET EN PLAN RÀPID, BUSCAR LA MANERA D'OBTENIR DATA REAL
     private Trial4C19 trial4C19;
 
     @Before
@@ -38,8 +39,8 @@ public class Trial4C19PRATest {
      * - S'afegeixen 10 usuaris més de manera desordenada
      * - Es modifiquen les dades del CINQUÉ usuari inserit (idUser9999)
      * 
-     * Donat que s'ha ampliat el nombre d'atributs que contindrà cada usuari (level 
-     * i birthdate),  
+     * Donat que s'ha ampliat el nombre d'atributs que contindrà cada usuari 
+     * (level i càlcul de la edat en funció del birthdate),  
      */
     
     @Test
@@ -52,9 +53,10 @@ public class Trial4C19PRATest {
         /**
          * EXTENDED TEST [#1.1]
          * 
-         * @test Comprovem que els usuaris contenen els nous atributs passats com a 
-         * paràmetre del nou constructor implementat a la classe User.java (birthdate
-         * i Trial4C19.Level)
+         * @test Comprovem que els usuaris contenen els nous atributs passats 
+         * com a paràmetre del nou constructor implementat a la classe User.java 
+         * (birthdate i Trial4C19.Level). També comprovem que el càlcul de la 
+         * edat realitzada al mètode User.years() és correcte.
          * 
          * @post S'afegeixen dos usuaris al diccionari ordenat d'usuaris i se'n 
          * actualitza les dades d'un d'ells
@@ -62,9 +64,9 @@ public class Trial4C19PRATest {
 
         this.trial4C19.addUser("idUser1000", "Robert", "Lopez", createDate("02-01-1942 00:00:00"), Trial4C19.Level.C);
         Assert.assertEquals("Robert", this.trial4C19.getUser("idUser1000").getName());
-        Assert.assertEquals("Robert", this.trial4C19.getUser("idUser1000").getSurname());
-        Assert.assertEquals("Robert", this.trial4C19.getUser("idUser1000").getLevel());
-        Assert.assertEquals("Robert", this.trial4C19.getUser("idUser1000").years(now));
+        Assert.assertEquals("Lopez", this.trial4C19.getUser("idUser1000").getSurname());
+        Assert.assertEquals(Trial4C19.Level.C, this.trial4C19.getUser("idUser1000").getLevel());
+        Assert.assertEquals(78, this.trial4C19.getUser("idUser1000").years(now));
         
         Assert.assertEquals(11, this.trial4C19.numUsers());
 
@@ -639,6 +641,9 @@ public class Trial4C19PRATest {
         Assert.assertEquals(Trial4C19.Level.A,  s8th.getUser().getLevel());
         Assert.assertEquals(32 , s8th.getUser().years(now));
         Assert.assertEquals(Trial4C19.Status.SENDED, s8th.getStatus());
+        
+        /* nextLaboratory Aqui estem comprovant que la rotació circular de laboratoris i la 
+         * conseguent distribució equitativa de mostres és correcta */ 
 
         Assert.assertEquals(2, this.trial4C19.numPendingSamplesByLaboratory("LAB1"));
         Assert.assertEquals(2, this.trial4C19.numPendingSamplesByLaboratory("LAB2"));
@@ -696,8 +701,27 @@ public class Trial4C19PRATest {
         Assert.assertEquals(createDate("15-12-2020 15:00:00"), sample1.getDateCreation() );
         Assert.assertEquals(createDate("15-12-2020 20:07:00"), sample1.getDateSended() );
         Assert.assertEquals(createDate("16-12-2020 11:30:00"), sample1.getDateCompleted() );
-
-
+        
+        /**
+         * EXTENDED TEST [#X.Y]
+         * 
+         * @test Primer comprovem que, un cop hem enviat un seguit de mostres de 
+         * la cua de mostres pendents als laboratoris i aquests les han 
+         * processat, l'AVL de mostres general segueix contenint totes les 
+         * mostres tal que " Total Samples = PENDING + SENT + COMPLETED" (ha de 
+         * correspondre amb la quantitat de mostres extretes al principi 
+         * d'aquest test). Seguidament, comprovarem, mitjançant una cerca sobre 
+         * el AVL de mostres general (que podem fer amb cost logarítmic), 
+         * que l'estat i atributs de les mostres tramitades és el que ha de 
+         * correspondre.
+         * 
+         * @post n/a
+         */ 
+        
+        Assert.assertEquals(8, this.trial4C19.numSamples());
+        Sample sample1B = this.trial4C19.getSample("sample1");
+        Assert.assertEquals(Trial4C19.Status.COMPLETED, sample1B.getStatus());
+        //Assert.assertEquals(Trial4C19.Status.COMPLETED, sample1.getStatus());
     }
 
     @Test(expected = UserNotFoundException.class)
@@ -721,6 +745,17 @@ public class Trial4C19PRATest {
      *                    TESTS ADDICIONALS DESENVOLUPATS
      *                      
      **********************************************************************/
+    
+    /**
+     * *feature*: (sobre la que fem @test): addUser del TAD TrialC19
+     * *given*: Hi ha xx mostres al AVL de mostres general del sistema
+     * *scenario*:
+     * - S'afegeixen 10 usuaris més de manera desordenada
+     * - Es modifiquen les dades del CINQUÉ usuari inserit (idUser9999)
+     * 
+     * Donat que s'ha ampliat el nombre d'atributs que contindrà cada usuari 
+     * (level i càlcul de la edat en funció del birthdate),  
+     */
 
     
     /**********************************************************************
