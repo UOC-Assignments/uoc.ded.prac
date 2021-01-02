@@ -17,7 +17,7 @@ public class Sample implements Comparable<Sample>{
     		
 	       int level_CMP = s1.user.getLevel().compareTo(s2.user.getLevel());
 
-	       /* Ara Comparem per edat i desem el resultat la comparació a "age_CMP" 
+	       /* Ara Comparem per edat i desem el resultat de la comparació a "age_CMP" 
 	        * (en aquest cas fem un cast dels int a string per a no haver 
 	        * d'implementar un comparador de int amb condicionals, és a dir, podrem
 	        * utilitzar el mètode "compareTo" de la classe String). Cal observar que 
@@ -28,14 +28,24 @@ public class Sample implements Comparable<Sample>{
 	       
 	       /* Finalment determinem si la mostra rebuda com a paràmetre del comparador 
 	        * té major prioritat que la mostra amb la que està sent comparada, tot 
-	        * tenint en compte els dos factors de prioritat (level i age): */
+	        * tenint en compte els dos factors de prioritat (level i age), mitjançant
+	        * el següent algorisme: 
+	        * 
+	        * Si el nivell de gravetat de s1.user > que el de s2.user -> return 1
+	        * Si el nivell de gravetat de s1.user == que el de s2.user, aleshores...
+	        * 		si la edat de s1.user > que la de s2.user -> return 1
+	        *       si la edat de s1.user == que la de s2.user -> return 0
+	        *       si la edat de s1.user < que la de s2.user -> return -1
+	        * Si el nivell de gravetat de s1.user < que el de s2.user (resta de 
+	        * casos) -> return -1
+	        * */
 
 	       if (level_CMP > 0) { 
 	    	   return 1;
 	       } else if (level_CMP == 0) { 
 	    	  if (age_CMP > 0) return 1;
 	    	  if (age_CMP == 0) return 0;
-	    	  if (age_CMP < 0) return -1;
+	    	  //if (age_CMP < 0) return -1; //Aquest retorn a la pràctica és redundant
 	       } 
 	       return -1;
 		}
