@@ -345,11 +345,6 @@ public class Trial4C19Impl implements Trial4C19 {
 		
 	}
 	
-	/* CUSTOM / AUX METHOD */
-    public void updateMostActiveClinician(Clinician c) {
-        if (this.mostActiveClinician == null) this.mostActiveClinician = c;
-        else if ( this.mostActiveClinician.getNumSamples() < c.getNumSamples() ) this.mostActiveClinician = c;
-    }
 
 	@Override
 	public Sample sendSample(Date date) throws NOSAmplesException {
@@ -522,5 +517,9 @@ public class Trial4C19Impl implements Trial4C19 {
 		}
 		return -1;
 	}
-
+	
+    public void updateMostActiveClinician(Clinician c) {
+        if (this.mostActiveClinician == null) this.mostActiveClinician = c;
+        else if ( this.mostActiveClinician.getNumSamples() < c.getNumSamples() ) this.mostActiveClinician = c;
+    }
 }

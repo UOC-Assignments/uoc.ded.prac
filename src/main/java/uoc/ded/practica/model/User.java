@@ -164,6 +164,8 @@ public class User implements Comparable<User>{
     public int compareTo(User o) {
         return this.getId().compareTo(o.getId());
     }
+    
+    /* UPGRADE #7: Mètode que retorna les mostres d'un usuari */
 
 	public Iterador<Sample> getSamples() {
 		return this.samples.elements();
