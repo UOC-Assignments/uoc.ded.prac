@@ -39,18 +39,33 @@ public class Trial4C19PRATest {
      * - Es modifiquen les dades del CINQUÉ usuari inserit (idUser9999)
      * 
      * Donat que s'ha ampliat el nombre d'atributs que contindrà cada usuari (level 
-     * i birthdate) 
+     * i birthdate),  
      */
     
     @Test
     public void testAddUser() {
 
-        // GIVEN:
+        // GIVEN: Donat el següent estat inicial de l'objecte trial4C19:
+    	
         Assert.assertEquals(10, this.trial4C19.numUsers());
-        //
+        
+        /**
+         * EXTENDED TEST [#1.1]
+         * 
+         * @test Comprovem que els usuaris contenen els nous atributs passats com a 
+         * paràmetre del nou constructor implementat a la classe User.java (birthdate
+         * i Trial4C19.Level)
+         * 
+         * @post S'afegeixen dos usuaris al diccionari ordenat d'usuaris i se'n 
+         * actualitza les dades d'un d'ells
+         */
 
         this.trial4C19.addUser("idUser1000", "Robert", "Lopez", createDate("02-01-1942 00:00:00"), Trial4C19.Level.C);
         Assert.assertEquals("Robert", this.trial4C19.getUser("idUser1000").getName());
+        Assert.assertEquals("Robert", this.trial4C19.getUser("idUser1000").getSurname());
+        Assert.assertEquals("Robert", this.trial4C19.getUser("idUser1000").getLevel());
+        Assert.assertEquals("Robert", this.trial4C19.getUser("idUser1000").years(now));
+        
         Assert.assertEquals(11, this.trial4C19.numUsers());
 
         this.trial4C19.addUser("idUser9999", "XXXXX", "YYYYY", createDate("12-11-1962 00:00:00"), Trial4C19.Level.D);
@@ -61,6 +76,8 @@ public class Trial4C19PRATest {
         Assert.assertEquals("Lluis", this.trial4C19.getUser("idUser9999").getName());
         Assert.assertEquals("Casals", this.trial4C19.getUser("idUser9999").getSurname());
         Assert.assertEquals(12, this.trial4C19.numUsers());
+        
+        //
     }
 
 

@@ -141,7 +141,7 @@ public class User implements Comparable<User>{
 		return this.level;
 	}
 
-	/* UPGRADE #5: Mètode per a calcular la edat obtingut de -> https://www.baeldung.com/java-get-age */ 
+	/* UPGRADE #5: Mètode per a calcular la edat, obtingut de -> https://www.baeldung.com/java-get-age */ 
 	
 	public int years(Date now) {
 	    DateFormat formatter = new SimpleDateFormat("yyyyMMdd");                           
