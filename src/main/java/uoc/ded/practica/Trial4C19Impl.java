@@ -422,22 +422,25 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public Iterador<Sample> samplesByTrial(int idTrial) throws TrialNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		Trial t = this.trials[idTrial];
+		if (t==null) throw new TrialNotFoundException();
+		return t.getSamples();
 	}
 
 
 	@Override
 	public Iterador<Sample> samplesByUser(String idUser) throws UserNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		User u = this.users.consultar(idUser);
+		if (u == null) throw new UserNotFoundException();
+		return u.getSamples();
 	}
 
 
 	@Override
 	public Iterador<Sample> samplesByClinician(String idClinician) throws ClinicianNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		Clinician c = this.clinicians.consultar(idClinician);
+		if (c == null) throw new ClinicianNotFoundException();
+		return c.getSamples();
 	}
 
 

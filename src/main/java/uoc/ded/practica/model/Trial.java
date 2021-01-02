@@ -76,4 +76,8 @@ public class Trial {
 	public int getNumSamples() {
 		return this.samples.nombreElems();
 	}
+
+	public Iterador<Sample> getSamples() {
+		return this.samples.elements();
+	}
 }

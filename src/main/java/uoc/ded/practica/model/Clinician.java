@@ -1,5 +1,6 @@
 package uoc.ded.practica.model;
 
+import uoc.ei.tads.Iterador;
 import uoc.ei.tads.LlistaEncadenada;
 
 public class Clinician {
@@ -55,5 +56,9 @@ public class Clinician {
 	
 	public void addSample(Sample s) {
 		this.samples.afegirAlFinal(s);
+	}
+
+	public Iterador<Sample> getSamples() {
+		return this.samples.elements();
 	}
 }

@@ -24,6 +24,18 @@ public class Trial4C19PRATest {
         this.trial4C19 = null;
     }
 
+    /**********************************************************************
+     * 
+     *                      		TESTS EP2 
+     *                      
+     **********************************************************************/
+    
+    
+    /**********************************************************************
+     * 
+     *                     TESTS PROPORCIONATS A LA PRAC
+     *                      
+     **********************************************************************/
 
     /**
      * *feature*: (sobre la que fem @test): addClinician del TAD TrialC19
@@ -262,7 +274,20 @@ public class Trial4C19PRATest {
     public void testAddSamplesAndClinicianNotFound() throws DEDException {
         this.trial4C19.newSample("sample1", "idUser1", "idClinicianXXX", createDate("15-12-2020 16:20:00"));
     }
+    
+    /**********************************************************************
+     * 
+     *                    TESTS ADDICIONALS DESENVOLUPATS
+     *                      
+     **********************************************************************/
 
+    
+    /**********************************************************************
+     * 
+     *                           MÈTODES AUXILIARS
+     *                      
+     **********************************************************************/
+    
     private Date createDate(String date) {
         return DateUtils.createDate(date);
     }
