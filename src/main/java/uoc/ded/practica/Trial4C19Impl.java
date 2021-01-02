@@ -473,8 +473,19 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public int numPendingSamplesByLaboratory(String idLaboratory) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		/* Com que hi ha pocs elements al vector, no considerem el cost de fer el 
+		 * recorregut del vector de labs (tal i com hem indicat repetides vegades) */
+		
+		int i = 0;
+		boolean found=false;
+		while (!found && i < this.laboratories.length) {
+			if ( this.laboratories[i].getIdLaboratory().equals(idLaboratory) ){
+				found = true;
+			}
+			else i++;
+		}
+		return this.laboratories[i].getNumSamples();
 	}
 
 

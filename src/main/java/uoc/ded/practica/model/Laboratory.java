@@ -33,4 +33,8 @@ public class Laboratory {
 	public void addSample(Sample s) {
 		this.samples.encuar(s);
 	}
+
+	public int getNumSamples() {
+		return this.samples.nombreElems();
+	}
 }
