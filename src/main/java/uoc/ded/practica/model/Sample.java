@@ -18,11 +18,11 @@ public class Sample implements Comparable<Sample>{
 	       int level_CMP = s1.user.getLevel().compareTo(s2.user.getLevel());
 
 	       /* Ara Comparem per edat i desem el resultat de la comparació a "age_CMP" 
-	        * (en aquest cas fem un cast dels int a string per a no haver 
+	        * (en aquest cas fem un cast dels integer a string per a no haver 
 	        * d'implementar un comparador de int amb condicionals, és a dir, podrem
 	        * utilitzar el mètode "compareTo" de la classe String). Cal observar que 
 	        * l'ordre ha d'estar de major edat a menor, així que intercanviem s1 i s2
-	        * respecte de la comparació anterior */
+	        * per a obtenir el resultat invers a l'obtingut per defecte */
     		
 	       int age_CMP = String.valueOf(s2.user.years(now)).compareTo(String.valueOf(s1.user.years(now)));
 	       
