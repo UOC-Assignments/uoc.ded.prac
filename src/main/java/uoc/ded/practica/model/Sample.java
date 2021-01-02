@@ -3,16 +3,46 @@ package uoc.ded.practica.model;
 import java.util.Comparator;
 import java.util.Date;
 
-import uoc.ded.practica.Trial4C19;
 import uoc.ded.practica.Trial4C19.Status;
 import uoc.ded.practica.util.DateUtils;
 
 public class Sample implements Comparable<Sample>{
+	private static final Date now = DateUtils.createDate("01-01-2021 00:00:00"); //AIXÒ ESTA FET EN PLAN RÀPID, BUSCAR LA MANERA D'OBTENIR DATA REAL
     public static final Comparator<Sample> CMP = new Comparator<Sample>() {
 		
-    	public int compare(Sample o1, Sample o2) {
-	           int res = o1.user.getLevel().compareTo(o2.user.getLevel());
-	           return res;
+    	public int compare(Sample s1, Sample s2) {
+    		
+		   /* Primer comparem per nivell de gravetat i desem el resultat a la var 
+		    * "level_CMP" (utilitzem el mètode compareTo de la classe String)*/
+    		
+	       int level_CMP = s1.user.getLevel().compareTo(s2.user.getLevel());
+
+	       /* Ara Comparem per edat i desem el resultat la comparació a "age_CMP" 
+	        * (en aquest cas, fem un cast dels int a string per a no haver 
+	        * d'implementar un comparador de ints amb condicionals, és a dir, podrem
+	        * utilitzar el mètode "compareTo" de la classe String) */
+	       
+	       int age_CMP = String.valueOf(s1.user.years(now)).compareTo(String.valueOf(s2.user.years(now)));
+	       
+	       /*int age_CMP = 0;      
+	       if ( s1.user.years(now) < s2.user.years(now) ) {
+	       	age_CMP = -1;
+	       } else if (s1.user.years(now) > s2.user.years(now)) {
+	       	age_CMP = 1;
+	       } else {
+	       	age_CMP = 0;
+	       } */
+	       
+	       /* Finalment determinem si la mostra rebuda com a paràmetre del comparador 
+	        * té major prioritat que la mostra amb la que està sent comparada, tot 
+	        * tenint en compte els dos factors de prioritat (level i age): */
+
+	       if (level_CMP < 0 && age_CMP < 0) { 
+	       	return -1;
+	       } else if (level_CMP > 0 && age_CMP > 0) { 
+	       	return 1; 
+	       }
+	       else return 0;
 		}
     };
 	
@@ -97,17 +127,13 @@ public class Sample implements Comparable<Sample>{
 	}
 
     public int compareTo(Sample s) {
-    	Date now = createDate("16-12-2020 11:30:00");
-    	int age_CMP = 0;
-    	
-    	/* Primer comparem per nivell de gravetat i desem el resultat a la var 
-    	 * "level_CMP" (utilitzem el mètode compareTo de la classe String)*/
-    	
-        return this.user.getLevel().compareTo(s.user.getLevel()); 
-        
+        return this.user.getLevel().compareTo(s.user.getLevel());       
     }
     
-    private Date createDate(String date) {
-        return DateUtils.createDate(date);
+    /* Retorna la data actual (implementació feta en plan ràpid, buscar manera de 
+     * generar data real amb el format requerit */
+    
+    private Date currentDate() {
+        return DateUtils.createDate("01-01-2021 00:00:00");
     }
 }
