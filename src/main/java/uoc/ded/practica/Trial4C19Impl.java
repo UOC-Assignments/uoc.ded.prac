@@ -372,7 +372,6 @@ public class Trial4C19Impl implements Trial4C19 {
 		
 		s.setStatus(Status.SENDED);
 		s.setDateSended(date);
-		System.out.printf("%d\n",this.nextLaboratory); //DEBUG
 		this.laboratories[this.nextLaboratory].addSample(s);
 				
 		/* Finalment caldrà actualitzar l'apuntador al següent laboratory */
