@@ -15,35 +15,29 @@ public class Sample implements Comparable<Sample>{
 		   /* Primer comparem per nivell de gravetat i desem el resultat a la var 
 		    * "level_CMP" (utilitzem el mètode compareTo de la classe String)*/
     		
-	       //int level_CMP = s1.user.getLevel().compareTo(s2.user.getLevel());
+	       int level_CMP = s1.user.getLevel().compareTo(s2.user.getLevel());
 
 	       /* Ara Comparem per edat i desem el resultat la comparació a "age_CMP" 
-	        * (en aquest cas, fem un cast dels int a string per a no haver 
-	        * d'implementar un comparador de ints amb condicionals, és a dir, podrem
+	        * (en aquest cas fem un cast dels int a string per a no haver 
+	        * d'implementar un comparador de int amb condicionals, és a dir, podrem
 	        * utilitzar el mètode "compareTo" de la classe String). Cal observar que 
 	        * l'ordre ha d'estar de major edat a menor, així que intercanviem s1 i s2
 	        * respecte de la comparació anterior */
-	       return String.valueOf(s2.user.years(now)).compareTo(String.valueOf(s1.user.years(now)));
-	       
-	       /*int age_CMP = 0;      
-	       if ( s1.user.years(now) < s2.user.years(now) ) {
-	       	age_CMP = -1;
-	       } else if (s1.user.years(now) > s2.user.years(now)) {
-	       	age_CMP = 1;
-	       } else {
-	       	age_CMP = 0;
-	       } */
+    		
+	       int age_CMP = String.valueOf(s2.user.years(now)).compareTo(String.valueOf(s1.user.years(now)));
 	       
 	       /* Finalment determinem si la mostra rebuda com a paràmetre del comparador 
 	        * té major prioritat que la mostra amb la que està sent comparada, tot 
 	        * tenint en compte els dos factors de prioritat (level i age): */
 
-	       /*if (level_CMP < 0 && age_CMP < 0) { 
-	       	return -1;
-	       } else if (level_CMP > 0 && age_CMP > 0) { 
-	       	return 1; 
-	       }
-	       else return 0;*/
+	       if (level_CMP > 0) { 
+	    	   return 1;
+	       } else if (level_CMP == 0) { 
+	    	  if (age_CMP > 0) return 1;
+	    	  if (age_CMP == 0) return 0;
+	    	  if (age_CMP < 0) return -1;
+	       } 
+	       return -1;
 		}
     };
 	
