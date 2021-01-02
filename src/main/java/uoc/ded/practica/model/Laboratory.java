@@ -33,6 +33,10 @@ public class Laboratory {
 	public void addSample(Sample s) {
 		this.samples.encuar(s);
 	}
+	
+	public Sample getNextSample() {
+		return this.samples.desencuar();
+	}
 
 	public int getNumSamples() {
 		return this.samples.nombreElems();

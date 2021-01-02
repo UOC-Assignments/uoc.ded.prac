@@ -396,10 +396,29 @@ public class Trial4C19Impl implements Trial4C19 {
 	@Override
 	public Sample processSample(String idLaboratory, Date date, String report)
 			throws LaboratoryNotFoundException, NOSAmplesException {
-		// TODO Auto-generated method stub
-		return null;
+		
+        /* En primer lloc cerquem el laboratori i si el trobem desem la posició del 
+         * vector en la que es troba. Si no, informem de l'error */
+		
+		int pos = findLabIndex(idLaboratory);
+		if (pos == -1) throw new LaboratoryNotFoundException();
+		
+		/* Seguidament desencuem de la cua FIFO de mostres enviades pendents de 
+		 * processar als laboratoris la següent mostra a processar. Si no hi ha 
+		 * mostres a la cua de mostres del lab, aleshores informem de l'error. */
+		
+		Sample s = this.laboratories[pos].getNextSample();
+		if (s==null) throw new NOSAmplesException();
+		
+		/* Finalment li hem de canviar l'estat a la mostra processada, així com
+		 * afegir-hi la data de processament i el report corresponent*/
+		
+		s.setDateCompleted(date);
+		s.setStatus(Status.COMPLETED);
+		s.setReport(report);
+		
+		return s;
 	}
-
 
 	@Override
 	public Iterador<Sample> samplesByTrial(int idTrial) throws TrialNotFoundException {
@@ -477,21 +496,28 @@ public class Trial4C19Impl implements Trial4C19 {
 		/* Com que hi ha pocs elements al vector, no considerem el cost de fer el 
 		 * recorregut del vector de labs (tal i com hem indicat repetides vegades) */
 		
-		int i = 0;
-		boolean found=false;
-		while (!found && i < this.laboratories.length) {
-			if ( this.laboratories[i].getIdLaboratory().equals(idLaboratory) ){
-				found = true;
-			}
-			else i++;
-		}
-		return this.laboratories[i].getNumSamples();
+		return this.laboratories[findLabIndex(idLaboratory)].getNumSamples();
 	}
 
 
 	@Override
 	public int numLaboratories() {
 		return this.numLaboratories;
+	}
+	
+	
+	/* AUX Methods */ 
+	
+	
+	private int findLabIndex(String idLaboratory) {
+		int i = 0;
+		while (this.laboratories[i] != null && i < this.laboratories.length) {
+			if ( this.laboratories[i].getIdLaboratory().equals(idLaboratory) ){
+				return i;
+			}
+			else i++;
+		}
+		return -1;
 	}
 
 }
