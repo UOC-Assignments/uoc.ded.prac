@@ -28,18 +28,18 @@ Concretament, s'han afegit els tests proporcionats a la solució de la EP2 (tot 
 següents tests que proven les implementacions realitzades per la PRAC i que no estaven comtemplats 
 en els 6 tests proporcionats per la PRAC:   
 
--**Extended test #1:** Nous requeriments AddUser() --> *Trial4C19PRATest.testAddUser()*
+- **Extended test #1:** Nous requeriments AddUser() --> *Trial4C19PRATest.testAddUser()*
  
--**Extended test #2:** Tests sobre el AVL de mostres general després de realitzar canvis d'estat 
+- **Extended test #2:** Tests sobre el AVL de mostres general després de realitzar canvis d'estat 
 d'algunes mostres --> *Trial4C19PRATest.testAddSamples()*
  
--**Extended test #3:** Comprovem que la implementació de la operació "samplesByUser()" demanada 
+- **Extended test #3:** Comprovem que la implementació de la operació "samplesByUser()" demanada 
 a l'enunciat és correcta --> *Trial4C19PRATest.testAddSamples()*
  
--**Extended test #4:** Comprovem que la implementació de la operació "samplesByClinician()" 
+- **Extended test #4:** Comprovem que la implementació de la operació "samplesByClinician()" 
 demanada a l'enunciat és correcta --> *Trial4C19PRATest.testAddSamples()*
  
--**Extended test #5:** Comprovem que la implementació de la operació "samplesByTrial()" demanada a 
+- **Extended test #5:** Comprovem que la implementació de la operació "samplesByTrial()" demanada a 
 l'enunciat és correcta --> *Trial4C19PRATest.testAddSamples()*
 
 Cal destacar que la implementació del TAD "Trial4C19Impl.java" realitzada (així com de les 
