@@ -466,7 +466,7 @@ public class Trial4C19Impl implements Trial4C19 {
 
 	@Override
 	public int numSamples() {
-		return this.pendingSamples.nombreElems();
+		return this.samples.nombreElems();
 	}
 
 

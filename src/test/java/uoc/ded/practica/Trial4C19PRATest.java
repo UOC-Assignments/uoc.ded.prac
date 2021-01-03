@@ -10,6 +10,7 @@ import uoc.ded.practica.util.DateUtils;
 import uoc.ei.tads.Iterador;
 
 import java.util.Date;
+import java.util.Iterator;
 
 public class Trial4C19PRATest {
 	
@@ -570,6 +571,8 @@ public class Trial4C19PRATest {
         Assert.assertEquals(5, this.trial4C19.numSamplesByTrial(1));
         Assert.assertEquals(3, this.trial4C19.numSamplesByTrial(2));
 
+        /* Comprovem l'estat inicial d'algunes mostres noves al AVL de mostres 
+         * general i que encara no s'han enviat a cap laboratori */
 
         Sample sample1 = this.trial4C19.getSample("sample1");
         Assert.assertEquals(Trial4C19.Status.PENDING, sample1.getStatus());
@@ -642,8 +645,9 @@ public class Trial4C19PRATest {
         Assert.assertEquals(32 , s8th.getUser().years(now));
         Assert.assertEquals(Trial4C19.Status.SENDED, s8th.getStatus());
         
-        /* nextLaboratory Aqui estem comprovant que la rotació circular de laboratoris i la 
-         * conseguent distribució equitativa de mostres és correcta */ 
+        /* nextLaboratory -> Aqui estem comprovant que la rotació circular de 
+         * laboratoris i la conseguent distribució equitativa de mostres és 
+         * correcta */ 
 
         Assert.assertEquals(2, this.trial4C19.numPendingSamplesByLaboratory("LAB1"));
         Assert.assertEquals(2, this.trial4C19.numPendingSamplesByLaboratory("LAB2"));
@@ -655,7 +659,6 @@ public class Trial4C19PRATest {
         Sample sample2Lab1 = this.trial4C19.processSample("LAB1", now, "Report: Sample2 (LAB1)");
         Assert.assertEquals("sample7", sample7Lab1.getIdSample());
         Assert.assertEquals("sample2", sample2Lab1.getIdSample());
-
 
         Sample sample6Lab2 = this.trial4C19.processSample("LAB2", now, "Report: Sample6 (LAB2)");
         Sample sample3Lab2 = this.trial4C19.processSample("LAB2", now, "Report: Sample3 (LAB2)");
@@ -670,8 +673,8 @@ public class Trial4C19PRATest {
         Sample sample4Lab4 = this.trial4C19.processSample("LAB4", now, "Report: Sample4 (LAB4)");
         Assert.assertEquals("sample4", sample4Lab4.getIdSample());
 
-        Sample sample7Lab5 = this.trial4C19.processSample("LAB5", now, "Report: Sample7 (LAB5)");
-        Assert.assertEquals("sample8", sample7Lab5.getIdSample());
+        Sample sample8Lab5 = this.trial4C19.processSample("LAB5", now, "Report: Sample8 (LAB5)");
+        Assert.assertEquals("sample8", sample8Lab5.getIdSample());
 
 
         Assert.assertEquals(Trial4C19.Status.COMPLETED, s1st.getStatus());
@@ -687,7 +690,7 @@ public class Trial4C19PRATest {
         Assert.assertEquals("Report: Sample4 (LAB4)", s4th.getReport());
 
         Assert.assertEquals(Trial4C19.Status.COMPLETED, s5th.getStatus());
-        Assert.assertEquals("Report: Sample7 (LAB5)", s5th.getReport());
+        Assert.assertEquals("Report: Sample8 (LAB5)", s5th.getReport());
 
         Assert.assertEquals(Trial4C19.Status.COMPLETED, s6th.getStatus());
         Assert.assertEquals("Report: Sample2 (LAB1)", s6th.getReport());
@@ -713,7 +716,10 @@ public class Trial4C19PRATest {
          * d'aquest test). Seguidament, comprovarem, mitjançant una cerca sobre 
          * el AVL de mostres general (que podem fer amb cost logarítmic), 
          * que l'estat i atributs de les mostres tramitades és el que ha de 
-         * correspondre.
+         * correspondre (és a dir, s'ha mantingut la consistència de les dades 
+         * al AVL de mostres general en funció del contingut de les cues de 
+         * mostres pendents d'enviar i pendents de processar pels laboratoris 
+         * respectivament.
          * 
          * @post n/a
          */ 
@@ -721,7 +727,65 @@ public class Trial4C19PRATest {
         Assert.assertEquals(8, this.trial4C19.numSamples());
         Sample sample1B = this.trial4C19.getSample("sample1");
         Assert.assertEquals(Trial4C19.Status.COMPLETED, sample1B.getStatus());
-        //Assert.assertEquals(Trial4C19.Status.COMPLETED, sample1.getStatus());
+        Assert.assertEquals("Tue Dec 15 15:00:00 CET 2020", sample1B.getDateCreation().toString());
+        Assert.assertEquals("Tue Dec 15 20:07:00 CET 2020", sample1B.getDateSended().toString());
+        Assert.assertEquals("Wed Dec 16 11:30:00 CET 2020", sample1B.getDateCompleted().toString());
+        Assert.assertEquals("Report: Sample1 (LAB3)", sample1B.getReport());
+        
+        /**
+         * EXTENDED TEST [#X.Y]
+         * 
+         * @test Comprovem que la llista encadenada de mostres d'un usuari conté
+         * les entrades corresponents a les mostres creades per a aquest usuari 
+         * i que aquestes mostren informació actualitzada (sent & processed 
+         * timestamp, report, status, etc). Per a agilitzar NOMÉS comprovarem que el 
+         * DARRER element de la llista encadenada és el que correspon, així com la 
+         * quantitat d'elements que conté la llista (2 mostres per a idUser1).
+         * 
+         * @post n/a
+         */ 
+        Sample lastUserSample = new Sample(null, null, null, null);
+        Iterador<Sample> it1 = this.trial4C19.getUser("idUser1").getSamples();
+        
+        while ( it1.hiHaSeguent() ) {
+        	lastUserSample = it1.seguent();
+        }
+        
+        Assert.assertEquals(2, this.trial4C19.getUser("idUser1").getNumSamples());
+        Assert.assertEquals("sample8", lastUserSample.getIdSample());
+        Assert.assertEquals(Trial4C19.Status.COMPLETED, lastUserSample.getStatus());
+        Assert.assertEquals("Tue Dec 15 20:04:00 CET 2020", lastUserSample.getDateSended().toString());
+        Assert.assertEquals("Wed Dec 16 11:30:00 CET 2020", lastUserSample.getDateCompleted().toString());
+        Assert.assertEquals("Report: Sample8 (LAB5)", lastUserSample.getReport());
+        
+        /**
+         * EXTENDED TEST [#X.Y]
+         * 
+         * @test Comprovem que la llista encadenada de mostres d'un especialista 
+         * conté les entrades corresponents a les mostres creades per a aquest 
+         * especialista i que aquestes mostren informació actualitzada (sent & 
+         * processed timestamp, report, status, etc). Per a agilitzar NOMÉS 
+         * comprovarem que el DARRER element de la llista encadenada és el que 
+         * correspon, així com la quantitat d'elements (X elements per a idClinicianY).
+         * 
+         * @post n/a
+         */ 
+        
+        
+        
+        /**
+         * EXTENDED TEST [#X.Y]
+         * 
+         * @test Comprovem que la llista encadenada de mostres d'un assaig conté
+         * les entrades corresponents a les mostres creades per a aquest usuari 
+         * i que aquestes mostren informació actualitzada (sent & processed 
+         * timestamp, report, status, etc). Per a agilitzar NOMÉS comprovarem que el 
+         * DARRER element de la llista encadenada és el que correspon, així com la 
+         * quantitat d'elements.
+         * 
+         * @post n/a
+         */ 
+        
     }
 
     @Test(expected = UserNotFoundException.class)
