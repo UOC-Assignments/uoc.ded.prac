@@ -47,7 +47,11 @@ estructures que aquest inclou) **supera totes les proves**.
 
 ## CONSIDERACIONS ADDICIONALS:
 
-- **Actualitzar l'especialista més actiu *(Trial4C19.mostActiveClinician)*:**
+- **Actualitzar l'especialista més actiu *(Trial4C19.mostActiveClinician)*:** Per tal d'actualitzar 
+l'especialista (clinician) més actiu, s'ha creat el mètode privat auxiliar 
+*"Trial4C19Impl.updateMostActiveClinician()"* el qual invoquem cada cop que s'extrau una mostra amb 
+*"Trial4C19Impl.NewSample()"*, ja que és el moment en el que s'afegeixen mostres a la llista 
+encadenada de mostres de l'especialista en qüestió.
 
 - **Com s'indexen i afegeixen els laboratoris al vector de labs:**
 
