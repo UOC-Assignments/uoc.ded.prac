@@ -470,8 +470,7 @@ public interface Trial4C19 {
      * @return retorna el nombre de laboratoris
      */
     public int numLaboratories();
-
-
+    
 }
 
 

@@ -10,15 +10,16 @@ public class Trial {
     private String description;
     private LlistaEncadenada<User> users;
     private OrderedVector<QuestionGroup> groups;
+    private LlistaEncadenada<Sample> samples;
     private User mostActiveUser;
     private int numAnswers;
-
 
     public Trial(int idTrial, String description) {
         this.idTrial = idTrial;
         this.description = description;
         this.users = new LlistaEncadenada<User>();
         this.groups = new OrderedVector<QuestionGroup>(Trial4C19.G, QuestionGroup.CMP);
+        this.samples = new LlistaEncadenada<Sample>();
         this.mostActiveUser = null;
     }
 
@@ -67,4 +68,16 @@ public class Trial {
         if (this.mostActiveUser == null) this.mostActiveUser = user;
         else if (this.mostActiveUser.numAnswers()<user.numAnswers()) this.mostActiveUser = user;
     }
+    
+    public void addSample(Sample s) {
+    	this.samples.afegirAlFinal(s);
+    }
+
+	public int getNumSamples() {
+		return this.samples.nombreElems();
+	}
+
+	public Iterador<Sample> getSamples() {
+		return this.samples.elements();
+	}
 }
