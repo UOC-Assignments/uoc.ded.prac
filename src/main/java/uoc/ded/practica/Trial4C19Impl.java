@@ -27,12 +27,15 @@ public class Trial4C19Impl implements Trial4C19 {
         this.users = new DiccionariOrderedVector<String, User>(U, User.CMP);
         this.trials = new Trial[T];
         this.groups = new OrderedVector<QuestionGroup>(G, QuestionGroup.CMP);
+        
         /*
          * Per a la cua amb prioritat on desarem les mostres pendents, del TAD 
          * "CuaAmbPrioritat()" de la biblioteca utilitzarem el Constructor amb un 
-         * paràmetre (capacitat màxima, per defecte) i elements d'una classe 
-         * comparable amb el comparador donat.
+         * paràmetre, concretament el comparador de mostres que s'ha implementat 
+         * al definir Sample.java -> Sample.CMP (la capacitat màxima de la cua 
+         * s'estableix per defecte).
          * */
+        
         this.samples = new DiccionariAVLImpl<String, Sample>();
         this.pendingSamples = new CuaAmbPrioritat<Sample>(Sample.CMP);
         this.clinicians = new TaulaDispersio<String, Clinician>();
@@ -57,7 +60,8 @@ public class Trial4C19Impl implements Trial4C19 {
         }
     }
     
-    /* UPGRADE #1: Modifiquem el mètode d'afegir usuaris per a contemplar els nous requeriments (atributs) */ 
+    /* UPGRADE #1: Modifiquem el mètode d'afegir usuaris per a contemplar els 
+     * nous requeriments (atributs) */ 
     
 	@Override   
     public void addUser(String idUser, String name, String surname, Date birthday, Level level) {
