@@ -735,23 +735,23 @@ public class Trial4C19PRATest {
         /**
          * EXTENDED TEST [#X.Y]
          * 
-         * @test Comprovem que la llista encadenada de mostres d'un usuari conté
+         * @test Comprovem que la llista encadenada de mostres d'un usuari encara conté
          * les entrades corresponents a les mostres creades per a aquest usuari 
          * i que aquestes mostren informació actualitzada (sent & processed 
-         * timestamp, report, status, etc). Per a agilitzar NOMÉS comprovarem que el 
+         * timestamp, report, status, etc). Per a agilitzar, NOMÉS comprovarem que el 
          * DARRER element de la llista encadenada és el que correspon, així com la 
          * quantitat d'elements que conté la llista (2 mostres per a idUser1).
          * 
          * @post n/a
          */ 
-        Sample lastUserSample = new Sample(null, null, null, null);
+        Sample lastUserSample = null;
         Iterador<Sample> it1 = this.trial4C19.getUser("idUser1").getSamples();
         
         while ( it1.hiHaSeguent() ) {
         	lastUserSample = it1.seguent();
         }
         
-        Assert.assertEquals(2, this.trial4C19.getUser("idUser1").getNumSamples());
+        Assert.assertEquals(2, this.trial4C19.numSamplesByUser("idUser1"));
         Assert.assertEquals("sample8", lastUserSample.getIdSample());
         Assert.assertEquals(Trial4C19.Status.COMPLETED, lastUserSample.getStatus());
         Assert.assertEquals("Tue Dec 15 20:04:00 CET 2020", lastUserSample.getDateSended().toString());
@@ -761,22 +761,33 @@ public class Trial4C19PRATest {
         /**
          * EXTENDED TEST [#X.Y]
          * 
-         * @test Comprovem que la llista encadenada de mostres d'un especialista 
+         * @test Comprovem que la llista encadenada de mostres d'un especialista encara
          * conté les entrades corresponents a les mostres creades per a aquest 
          * especialista i que aquestes mostren informació actualitzada (sent & 
          * processed timestamp, report, status, etc). Per a agilitzar NOMÉS 
          * comprovarem que el DARRER element de la llista encadenada és el que 
-         * correspon, així com la quantitat d'elements (X elements per a idClinicianY).
+         * correspon, així com la quantitat d'elements (4 mostres per a idClinicianY).
          * 
          * @post n/a
          */ 
+        Sample lastClinicianSample = null;
+        Iterador<Sample> it2 = this.trial4C19.getClinician("idClinician3").getSamples();
         
+        while ( it2.hiHaSeguent() ) {
+        	lastClinicianSample = it2.seguent();
+        }
         
+        Assert.assertEquals(4, this.trial4C19.numSamplesByClinician("idClinician3"));
+        Assert.assertEquals("sample7", lastClinicianSample.getIdSample());
+        Assert.assertEquals(Trial4C19.Status.COMPLETED, lastClinicianSample.getStatus());
+        Assert.assertEquals("Tue Dec 15 20:00:00 CET 2020", lastClinicianSample.getDateSended().toString());
+        Assert.assertEquals("Wed Dec 16 11:30:00 CET 2020", lastClinicianSample.getDateCompleted().toString());
+        Assert.assertEquals("Report: Sample7 (LAB1)", lastClinicianSample.getReport());
         
         /**
          * EXTENDED TEST [#X.Y]
          * 
-         * @test Comprovem que la llista encadenada de mostres d'un assaig conté
+         * @test Comprovem que la llista encadenada de mostres d'un assaig encara conté
          * les entrades corresponents a les mostres creades per a aquest usuari 
          * i que aquestes mostren informació actualitzada (sent & processed 
          * timestamp, report, status, etc). Per a agilitzar NOMÉS comprovarem que el 
