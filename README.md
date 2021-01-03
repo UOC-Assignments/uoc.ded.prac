@@ -19,9 +19,9 @@ Pel que fa als detalls d'implementació, s'ha cregut convenient afegir els comen
 
 Per a comprovar que les implementacions realitzades al projecte són fidels als requisits establerts a l'enunciat, s'ha ampliat el joc de proves JUNIT4 proporcionat:
 
- - Fitxer /src/test/java/FactoryTrial4C19Extended.java
+ - Fitxer /src/test/java/Trial4C19PRACTest.java
  
-Concretament, s'han afegit els tests proporcionats a la solució de la EP2 (tot modificant el test "addUser" per a testejar la implementació dels nous requeriments), així com els següents tests que proven les implementacions realitzades per la PRAC i que no estaven comtemplats en els 6 tests proporcionats per la PRAC:   
+Concretament, s'han afegit els tests proporcionats a la solució de la EP2 (tot modificant el test "testAddUser()" per tal de testejar la implementació dels nous requeriments), així com els següents tests que proven les implementacions realitzades per la PRAC i que no estaven comtemplats en els 6 tests proporcionats per la PRAC:   
 
  - Extended test #1: Nous requeriments AddUser() --> Trial4C19PRATest.testAddUser()
  
@@ -37,9 +37,10 @@ Cal destacar que la implementació del TAD "Trial4C19Impl.java" realitzada (aix�
 
 ## CONSIDERACIONS ADDICIONALS:
 
-PENDENT Explicar:
+- **Actualitzar l'especialista més actiu (Trial4C19.mostActiveClinician):**
 
-- mostActiveClinician
-- com s'índexen i afegeixen els laboratoris al vector de labs
-- Implementació del comparador de mostres a Samples.java
-- com es reparteixen les mostres entre els laboratoris (ús de Trial4C19.nextLaboratory i Trial4C19.numLaboratories)
+- **Com s'índexen i afegeixen els laboratoris al vector de labs**
+
+- **Implementació del comparador de mostres (Samples.CMP)**
+
+- **Com es reparteixen les mostres entre els laboratoris (Trial4C19.nextLaboratory i Trial4C19.numLaboratories)**
