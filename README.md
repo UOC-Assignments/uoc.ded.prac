@@ -42,15 +42,15 @@ en els 6 tests proporcionats per la PRAC:
 - **Extended test #5:** Comprovem que la implementació de la operació "samplesByTrial()" demanada a 
   l'enunciat és correcta --> *Trial4C19PRATest.testAddSamples()*
 
-Cal destacar que la implementació del TAD "Trial4C19Impl.java" realitzada (així com de les 
+Cal destacar que la implementació del TAD *"Trial4C19Impl.java"* realitzada (així com de les 
 estructures que aquest inclou) **supera totes les proves**.
 
 ## CONSIDERACIONS ADDICIONALS:
 
-- **Actualitzar l'especialista més actiu (Trial4C19.mostActiveClinician):**
+- **Actualitzar l'especialista més actiu *(Trial4C19.mostActiveClinician)*:**
 
 - **Com s'indexen i afegeixen els laboratoris al vector de labs:**
 
-- **Implementació del comparador de mostres (Samples.CMP):**
+- **Implementació del comparador de mostres *(Samples.CMP)*:**
 
-- **Com es reparteixen les mostres entre els laboratoris (Trial4C19.nextLaboratory i Trial4C19.numLaboratories):**
+- **Com es reparteixen les mostres entre els laboratoris *(Trial4C19.nextLaboratory i Trial4C19.numLaboratories)*:**
