@@ -1,6 +1,5 @@
 package uoc.ded.practica.model;
 
-import uoc.ded.practica.Trial4C19;
 import uoc.ei.tads.*;
 
 import java.text.DateFormat;
@@ -37,7 +36,7 @@ public class User implements Comparable<User>{
         this.questions = new CuaVectorImpl<Question>();
     }
     
-	/* UPGRADE #4: Fem un constructor nou tenint en compte el nous atributs (UPGRADES #1 a #3) */
+	/* UPGRADE #4: Implementem un constructor nou tenint en compte el nous atributs (UPGRADES #1 a #3) */
     
     public User(String idUser, String name, String surname, Date birthday, Level level) {
         this.setId(idUser);
@@ -151,7 +150,8 @@ public class User implements Comparable<User>{
 	    return age; 
 	}
 	
-	/* UPGRADE #6: Mètode per a afegir una nova mostra extreta a l'usuari */
+	/* UPGRADE #6: Mètode per a afegir una nova mostra extreta a l'usuari a la llista
+	 * encadenada de mostres de l'usuari */
 	
 	public void addSample(Sample s) {
 		this.samples.afegirAlFinal(s);

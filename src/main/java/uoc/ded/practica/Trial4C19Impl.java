@@ -308,7 +308,8 @@ public class Trial4C19Impl implements Trial4C19 {
 		 * a un trial 
 		 * 
 		 * OBSERVACIÓ: A La PAC2 "newSample" reb com a paràmetre "TrialID" 
-		 * mentre que a l'enunciat de la PRAC no --> Preguntar al fòrum?
+		 * així com a l'enunciat de la PRAC no. Tanmateix. a la interficie 
+		 * Trial4C19.java es defineix "newSample" només amb 4 arguments --> Preguntar al fòrum?
 		 * */
 		
 		User user = this.getUser(idUser);
@@ -316,14 +317,14 @@ public class Trial4C19Impl implements Trial4C19 {
 			throw new UserNotFoundException();
 		}
 		
-		Clinician clinician = this.getClinician(idClinician);
-		if (clinician == null) {
-			throw new ClinicianNotFoundException();
-		}
-		
 		Trial trial = user.getTrial();
 		if (trial==null) {
 			throw new TrialNotFoundException();
+		}
+		
+		Clinician clinician = this.getClinician(idClinician);
+		if (clinician == null) {
+			throw new ClinicianNotFoundException();
 		}
 		
 		/* Ara podem procedir a afegir la nova mostra a l'arbre AVL de mostres global,
@@ -506,7 +507,12 @@ public class Trial4C19Impl implements Trial4C19 {
 	
 	/* AUX Methods */ 
 	
-	
+    /**
+     * Mètode que proporciona la posició del vector (índex) on està emmagatzemat el 
+     * laboratori amb "idLaboratory"
+     * @param idLaboratory identificador de laboratori
+     * @return retorna la posició del vector
+     */
 	private int findLabIndex(String idLaboratory) {
 		int i = 0;
 		while (this.laboratories[i] != null && i < this.laboratories.length) {
@@ -518,8 +524,20 @@ public class Trial4C19Impl implements Trial4C19 {
 		return -1;
 	}
 	
+    /**
+     * Mètode que actualitza 
+     * @param especialista "c" al qual se li ha assignat la extracció d'una mostra 
+     * @post Si no hi havia cap especialista amb mostres al sistema, o bé el la mostra
+	 * que estem afegint implica que l'especialista implicat passi a ser el més actiu, 
+	 * aleshores "this.mostActiveClinician" s'actualitza amb el nou especialista 
+	 * (paràmetre c).
+     */
     public void updateMostActiveClinician(Clinician c) {
-        if (this.mostActiveClinician == null) this.mostActiveClinician = c;
-        else if ( this.mostActiveClinician.getNumSamples() < c.getNumSamples() ) this.mostActiveClinician = c;
+    	
+        if (this.mostActiveClinician == null) { 
+        	this.mostActiveClinician = c;
+        } else if ( this.mostActiveClinician.getNumSamples() < c.getNumSamples() ) { 
+        	this.mostActiveClinician = c;
+        }
     }
 }

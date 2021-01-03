@@ -133,11 +133,4 @@ public class Sample implements Comparable<Sample>{
     public int compareTo(Sample s) {
         return this.user.getLevel().compareTo(s.user.getLevel());       
     }
-    
-    /* Retorna la data actual (implementació feta en plan ràpid, buscar manera de 
-     * generar data real amb el format requerit */
-    
-    private Date currentDate() {
-        return DateUtils.createDate("01-01-2021 00:00:00");
-    }
 }
