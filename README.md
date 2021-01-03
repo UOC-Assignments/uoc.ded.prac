@@ -51,9 +51,9 @@ estructures que aquest inclou) **supera totes les proves**.
 l'especialista (clinician) més actiu, s'ha creat el mètode privat auxiliar 
 *"Trial4C19Impl.updateMostActiveClinician()"* el qual invoquem cada cop que s'extrau una mostra amb 
 *"Trial4C19Impl.NewSample()"*, ja que és el moment en el que s'afegeixen mostres a la llista 
-encadenada de mostres de l'especialista en qüestió.
+encadenada de mostres de l'especialista que supervisa la mostra.
 
-- **Com s'indexen i afegeixen els laboratoris al vector de labs:**
+- **Com s'indexen i afegeixen els laboratoris al vector de labs:** 
 
 - **Implementació del comparador de mostres *(Samples.CMP)*:**
 
