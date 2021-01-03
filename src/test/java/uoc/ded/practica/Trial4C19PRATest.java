@@ -10,7 +10,6 @@ import uoc.ded.practica.util.DateUtils;
 import uoc.ei.tads.Iterador;
 
 import java.util.Date;
-import java.util.Iterator;
 
 public class Trial4C19PRATest {
 	
@@ -745,7 +744,7 @@ public class Trial4C19PRATest {
          * @post n/a
          */ 
         Sample lastUserSample = null;
-        Iterador<Sample> it1 = this.trial4C19.getUser("idUser1").getSamples();
+        Iterador<Sample> it1 = this.trial4C19.samplesByUser("idUser1");
         
         while ( it1.hiHaSeguent() ) {
         	lastUserSample = it1.seguent();
@@ -766,12 +765,12 @@ public class Trial4C19PRATest {
          * especialista i que aquestes mostren informació actualitzada (sent & 
          * processed timestamp, report, status, etc). Per a agilitzar NOMÉS 
          * comprovarem que el DARRER element de la llista encadenada és el que 
-         * correspon, així com la quantitat d'elements (4 mostres per a idClinicianY).
+         * correspon, així com la quantitat d'elements (4 mostres per a idClinician3).
          * 
          * @post n/a
          */ 
         Sample lastClinicianSample = null;
-        Iterador<Sample> it2 = this.trial4C19.getClinician("idClinician3").getSamples();
+        Iterador<Sample> it2 = this.trial4C19.samplesByClinician("idClinician3");
         
         while ( it2.hiHaSeguent() ) {
         	lastClinicianSample = it2.seguent();
@@ -796,7 +795,18 @@ public class Trial4C19PRATest {
          * 
          * @post n/a
          */ 
+        Sample lastTrialSample = null;
+        Iterador<Sample> it3 = this.trial4C19.samplesByTrial(1);
         
+        while ( it3.hiHaSeguent() ) {
+        	lastTrialSample = it3.seguent();
+        }
+        Assert.assertEquals(5, this.trial4C19.numSamplesByTrial(1));
+        Assert.assertEquals("sample8", lastTrialSample.getIdSample());
+        Assert.assertEquals(Trial4C19.Status.COMPLETED, lastTrialSample.getStatus());
+        Assert.assertEquals("Tue Dec 15 20:04:00 CET 2020", lastTrialSample.getDateSended().toString());
+        Assert.assertEquals("Wed Dec 16 11:30:00 CET 2020", lastTrialSample.getDateCompleted().toString());
+        Assert.assertEquals("Report: Sample8 (LAB5)", lastTrialSample.getReport());       
     }
 
     @Test(expected = UserNotFoundException.class)
@@ -814,23 +824,6 @@ public class Trial4C19PRATest {
     public void testAddSamplesAndClinicianNotFound() throws DEDException {
         this.trial4C19.newSample("sample1", "idUser1", "idClinicianXXX", createDate("15-12-2020 16:20:00"));
     }
-    
-    /**********************************************************************
-     * 
-     *                    TESTS ADDICIONALS DESENVOLUPATS
-     *                      
-     **********************************************************************/
-    
-    /**
-     * *feature*: (sobre la que fem @test): addUser del TAD TrialC19
-     * *given*: Hi ha xx mostres al AVL de mostres general del sistema
-     * *scenario*:
-     * - S'afegeixen 10 usuaris més de manera desordenada
-     * - Es modifiquen les dades del CINQUÉ usuari inserit (idUser9999)
-     * 
-     * Donat que s'ha ampliat el nombre d'atributs que contindrà cada usuari 
-     * (level i càlcul de la edat en funció del birthdate),  
-     */
 
     
     /**********************************************************************
