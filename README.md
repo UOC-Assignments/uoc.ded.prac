@@ -23,15 +23,15 @@ Per a comprovar que les implementacions realitzades al projecte són fidels als 
  
 Concretament, s'han afegit els tests proporcionats a la solució de la EP2 (tot modificant el test "testAddUser()" per tal de testejar la implementació dels nous requeriments), així com els següents tests que proven les implementacions realitzades per la PRAC i que no estaven comtemplats en els 6 tests proporcionats per la PRAC:   
 
- - **Extended test #1:** Nous requeriments AddUser() --> Trial4C19PRATest.testAddUser()
+ - **Extended test #1:** Nous requeriments AddUser() --> *Trial4C19PRATest.testAddUser()*
  
- - **Extended test #2:** Tests sobre el AVL de mostres general després de realitzar canvis d'estat d'algunes mostres --> Trial4C19PRATest.testAddSamples()
+ - **Extended test #2:** Tests sobre el AVL de mostres general després de realitzar canvis d'estat d'algunes mostres --> *Trial4C19PRATest.testAddSamples()*
  
- - **Extended test #3:** Comprovem que la implementació de la operació "samplesByUser()" demanada a l'enunciat és correcta --> Trial4C19PRATest.testAddSamples()
+ - **Extended test #3:** Comprovem que la implementació de la operació "samplesByUser()" demanada a l'enunciat és correcta --> *Trial4C19PRATest.testAddSamples()*
  
- - **Extended test #4:** Comprovem que la implementació de la operació "samplesByClinician()" demanada a l'enunciat és correcta --> Trial4C19PRATest.testAddSamples()
+ - **Extended test #4:** Comprovem que la implementació de la operació "samplesByClinician()" demanada a l'enunciat és correcta --> *Trial4C19PRATest.testAddSamples()*
  
- - **Extended test #5:** Comprovem que la implementació de la operació "samplesByTrial()" demanada a l'enunciat és correcta --> Trial4C19PRATest.testAddSamples()
+ - **Extended test #5:** Comprovem que la implementació de la operació "samplesByTrial()" demanada a l'enunciat és correcta --> *Trial4C19PRATest.testAddSamples()*
 
 Cal destacar que la implementació del TAD "Trial4C19Impl.java" realitzada (així com de les estructures que aquest inclou) **supera totes les proves**.
 
@@ -39,7 +39,7 @@ Cal destacar que la implementació del TAD "Trial4C19Impl.java" realitzada (aix�
 
 - **Actualitzar l'especialista més actiu (Trial4C19.mostActiveClinician):**
 
-- **Com s'índexen i afegeixen els laboratoris al vector de labs:**
+- **Com s'indexen i afegeixen els laboratoris al vector de labs:**
 
 - **Implementació del comparador de mostres (Samples.CMP):**
 
