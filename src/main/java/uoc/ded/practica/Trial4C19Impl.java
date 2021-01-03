@@ -504,8 +504,11 @@ public class Trial4C19Impl implements Trial4C19 {
 		return this.numLaboratories;
 	}
 	
-	
-	/* AUX Methods */ 
+    /* *********************************************************************
+     * 
+     *                           MÈTODES AUXILIARS
+     *                      
+     ********************************************************************* */
 	
     /**
      * Mètode que proporciona la posició del vector (índex) on està emmagatzemat el 
@@ -525,14 +528,14 @@ public class Trial4C19Impl implements Trial4C19 {
 	}
 	
     /**
-     * Mètode que actualitza 
+     * Mètode que actualitza l'especialista més actiu
      * @param especialista "c" al qual se li ha assignat la extracció d'una mostra 
      * @post Si no hi havia cap especialista amb mostres al sistema, o bé el la mostra
 	 * que estem afegint implica que l'especialista implicat passi a ser el més actiu, 
 	 * aleshores "this.mostActiveClinician" s'actualitza amb el nou especialista 
 	 * (paràmetre c).
      */
-    public void updateMostActiveClinician(Clinician c) {
+    private void updateMostActiveClinician(Clinician c) {
     	
         if (this.mostActiveClinician == null) { 
         	this.mostActiveClinician = c;
