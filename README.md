@@ -19,7 +19,7 @@ Pel que fa als detalls d'implementació, s'ha cregut convenient afegir els comen
 
 Per a comprovar que les implementacions realitzades al projecte són fidels als requisits establerts a l'enunciat, s'ha ampliat el joc de proves JUNIT4 proporcionat:
 
- - Fitxer /src/test/java/Trial4C19PRACTest.java
+>Fitxer /src/test/java/Trial4C19PRACTest.java
  
 Concretament, s'han afegit els tests proporcionats a la solució de la EP2 (tot modificant el test "testAddUser()" per tal de testejar la implementació dels nous requeriments), així com els següents tests que proven les implementacions realitzades per la PRAC i que no estaven comtemplats en els 6 tests proporcionats per la PRAC:   
 
