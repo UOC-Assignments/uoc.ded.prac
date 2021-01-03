@@ -51,7 +51,7 @@ public class Trial4C19PRATest {
         Assert.assertEquals(10, this.trial4C19.numUsers());
         
         /**
-         * EXTENDED TEST [#1.1]
+         * EXTENDED TEST [#1]
          * 
          * @test Comprovem que els usuaris contenen els nous atributs passats 
          * com a paràmetre del nou constructor implementat a la classe User.java 
@@ -644,7 +644,7 @@ public class Trial4C19PRATest {
         Assert.assertEquals(32 , s8th.getUser().years(now));
         Assert.assertEquals(Trial4C19.Status.SENDED, s8th.getStatus());
         
-        /* nextLaboratory -> Aqui estem comprovant que la rotació circular de 
+        /* nextLaboratory -> Aqui ja estem comprovant que la rotació circular de 
          * laboratoris i la conseguent distribució equitativa de mostres és 
          * correcta */ 
 
@@ -705,7 +705,7 @@ public class Trial4C19PRATest {
         Assert.assertEquals(createDate("16-12-2020 11:30:00"), sample1.getDateCompleted() );
         
         /**
-         * EXTENDED TEST [#X.Y]
+         * EXTENDED TEST [#2]
          * 
          * @test Primer comprovem que, un cop hem enviat un seguit de mostres de 
          * la cua de mostres pendents als laboratoris i aquests les han 
@@ -732,7 +732,7 @@ public class Trial4C19PRATest {
         Assert.assertEquals("Report: Sample1 (LAB3)", sample1B.getReport());
         
         /**
-         * EXTENDED TEST [#X.Y]
+         * EXTENDED TEST [#3]
          * 
          * @test Comprovem que la llista encadenada de mostres d'un usuari encara conté
          * les entrades corresponents a les mostres creades per a aquest usuari 
@@ -758,7 +758,7 @@ public class Trial4C19PRATest {
         Assert.assertEquals("Report: Sample8 (LAB5)", lastUserSample.getReport());
         
         /**
-         * EXTENDED TEST [#X.Y]
+         * EXTENDED TEST [#4]
          * 
          * @test Comprovem que la llista encadenada de mostres d'un especialista encara
          * conté les entrades corresponents a les mostres creades per a aquest 
@@ -784,7 +784,7 @@ public class Trial4C19PRATest {
         Assert.assertEquals("Report: Sample7 (LAB1)", lastClinicianSample.getReport());
         
         /**
-         * EXTENDED TEST [#X.Y]
+         * EXTENDED TEST [#5]
          * 
          * @test Comprovem que la llista encadenada de mostres d'un assaig encara conté
          * les entrades corresponents a les mostres creades per a aquest usuari 
