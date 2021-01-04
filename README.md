@@ -10,7 +10,7 @@
 
 **GITHUB REPO: UOC-Assignments/uoc.ded.prac** 
 
-## 1. ASPECTES DESTACADES D'IMPLEMENTACIÓ DE LES ESTRUCTURES I LES OPERACIONS DEMANADES:
+## 1. ASPECTES DESTACATS D'IMPLEMENTACIÓ DE LES ESTRUCTURES I LES OPERACIONS DEMANADES:
 
 - **Actualitzar l'especialista més actiu *(Trial4C19.mostActiveClinician)*:** Per tal 
   d'actualitzar l'especialista (clinician) més actiu, s'ha creat el mètode privat auxiliar 
@@ -25,12 +25,22 @@
   al codi, les operacions de cerca sobre el vector (implementada a la operació 
   Trial4C19.getLaboratory()), tot i que "sobre el paper" tindran una eficiència temporal linial 
   O(n), a la pràctica la poca quantitat de laboratoris "n" tal que "n<100" farà que com a màxim
-  la eficiència temporal de les cerques passi a ser O(100), equivalent a un temps constant.
+  la eficiència temporal de les cerques passi a ser O(100), és a dir, equivalent a un temps 
+  constant.
 
-- **Implementació del comparador de mostres *(Samples.CMP)*:**
-
-- **Com es reparteixen les mostres entre els laboratoris *(Trial4C19.nextLaboratory i 
-  Trial4C19.numLaboratories)*:**
+- **Com es reparteixen les mostres entre els laboratoris *(Trial4C19.sendSample())*:** Per al 
+  repartiment equitatiu de les mostres entre els diferents laboratoris (la qual es realitza de 
+  manera seqüencial i circular) s'utilitza la variable de classe "nextLaboratory" que indica la 
+  següent posició del vector que conté el laboratori al que s'enviarà la pròxima mostra i la qual
+  s'actualitzarà cada cop que s'executi la operació *"Trial4C19.sendSample()"*
+  
+- **Implementació del comparador de mostres *(Samples.CMP)*:** Per tal d'establir la prioritat 
+  de les mostres a la cua amb prioritat de mostres en estat pendent *"Trial4C19.pendingSamples"*,
+  s'ha procedit a implementar la interficie "Comparador" a la classe "Samples.java", de manera que 
+  aquesta permet comparar dos objectes de classe Sample i determinar quin d'ells té major 
+  prioritat en funció de la edat i el grau de gravetat de l'usuari asociat. D'aquesta manera, al 
+  cridar el constructor de la cua amb prioritat li podem definir (mitjançant el pas del paràmetre 
+  *"Samples.CMP"*) quin serà el criteri de comparació d'elements de la cua.
 
 ## 2. JOCS DE PROVES:
 

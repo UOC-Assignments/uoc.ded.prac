@@ -262,7 +262,8 @@ public class Trial4C19Impl implements Trial4C19 {
 		 *  actualitzat amb el nombre de laboratoris total i que ens servirà per 
 		 *  a saber la posició del vector en la que hem d'afegir el laboratori 
 		 *  (la següent a la darrera, ja que no eliminarem mai laboratoris i les 
-		 *  posicions del vector utilitzades són contigues).
+		 *  posicions del vector utilitzades són contigues, és a dir, el vector 
+		 *  estarà compactat).
 		 *  
 		 *  Obviament, escollirem la opció #2 ja que el cost espacial d'emmagatzemar
 		 *  numLaboratory és insignificant i la millora en eficiència temporal és 
@@ -367,8 +368,9 @@ public class Trial4C19Impl implements Trial4C19 {
 		
 		/* Si hem pogut obtenir la següent mostra a enviar, la hem d'assignar a la 
 		 * cua FIFO de mostres enviades (estat "SENDED") del següent laboratori en el 
-		 * circuit de rotacions. Abans però, caldrà establir el nou estat de la mostra 
-		 * i afegir la data d'enviment de la mateixa */
+		 * circuit de rotacions (el qual vé indexat per la variable "nextLaboratory". 
+		 * Abans però, caldrà establir el nou estat de la mostra i afegir la data 
+		 * d'enviment de la mateixa */
 		
 		s.setStatus(Status.SENDED);
 		s.setDateSended(date);
