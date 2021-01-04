@@ -710,7 +710,7 @@ public class Trial4C19PRATest {
          * @test Primer comprovem que, un cop hem enviat un seguit de mostres de 
          * la cua de mostres pendents als laboratoris i aquests les han 
          * processat, l'AVL de mostres general segueix contenint totes les 
-         * mostres tal que " Total Samples = PENDING + SENT + COMPLETED" (ha de 
+         * mostres tal que "Total Samples = PENDING + SENT + COMPLETED" (ha de 
          * correspondre amb la quantitat de mostres extretes al principi 
          * d'aquest test). Seguidament, comprovarem, mitjançant una cerca sobre 
          * el AVL de mostres general (que podem fer amb cost logarítmic), 
