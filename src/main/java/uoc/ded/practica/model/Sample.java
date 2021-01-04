@@ -130,7 +130,11 @@ public class Sample implements Comparable<Sample>{
 		return this.completionDate;
 	}
 
-    public int compareTo(Sample s) {
-        return this.user.getLevel().compareTo(s.user.getLevel());       
-    }
+	@Override
+	public int compareTo(Sample o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+   
 }

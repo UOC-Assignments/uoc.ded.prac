@@ -27,12 +27,15 @@ public class Trial4C19Impl implements Trial4C19 {
         this.users = new DiccionariOrderedVector<String, User>(U, User.CMP);
         this.trials = new Trial[T];
         this.groups = new OrderedVector<QuestionGroup>(G, QuestionGroup.CMP);
+        
         /*
          * Per a la cua amb prioritat on desarem les mostres pendents, del TAD 
          * "CuaAmbPrioritat()" de la biblioteca utilitzarem el Constructor amb un 
-         * paràmetre (capacitat màxima, per defecte) i elements d'una classe 
-         * comparable amb el comparador donat.
+         * paràmetre, concretament el comparador de mostres que s'ha implementat 
+         * al definir Sample.java -> Sample.CMP (la capacitat màxima de la cua 
+         * s'estableix per defecte).
          * */
+        
         this.samples = new DiccionariAVLImpl<String, Sample>();
         this.pendingSamples = new CuaAmbPrioritat<Sample>(Sample.CMP);
         this.clinicians = new TaulaDispersio<String, Clinician>();
@@ -41,7 +44,7 @@ public class Trial4C19Impl implements Trial4C19 {
         this.mostActiveClinician = null;
         
         /* no cal inicialitzar numTrials, numLaboratories ni nextLaboratory ja 
-         * que són variables membres de classe Java 
+         * que són variables membres d'una classe de Java 
          * --> https://stackoverflow.com/questions/19131336/default-values-and-initialization-in-java
          */
     }
@@ -57,7 +60,8 @@ public class Trial4C19Impl implements Trial4C19 {
         }
     }
     
-    /* UPGRADE #1: Modifiquem el mètode d'afegir usuaris per a contemplar els nous requeriments (atributs) */ 
+    /* UPGRADE #1: Modifiquem el mètode d'afegir usuaris per a contemplar els 
+     * nous requeriments (atributs) */ 
     
 	@Override   
     public void addUser(String idUser, String name, String surname, Date birthday, Level level) {
@@ -258,7 +262,8 @@ public class Trial4C19Impl implements Trial4C19 {
 		 *  actualitzat amb el nombre de laboratoris total i que ens servirà per 
 		 *  a saber la posició del vector en la que hem d'afegir el laboratori 
 		 *  (la següent a la darrera, ja que no eliminarem mai laboratoris i les 
-		 *  posicions del vector utilitzades són contigues).
+		 *  posicions del vector utilitzades són contigues, és a dir, el vector 
+		 *  estarà compactat).
 		 *  
 		 *  Obviament, escollirem la opció #2 ja que el cost espacial d'emmagatzemar
 		 *  numLaboratory és insignificant i la millora en eficiència temporal és 
@@ -363,8 +368,9 @@ public class Trial4C19Impl implements Trial4C19 {
 		
 		/* Si hem pogut obtenir la següent mostra a enviar, la hem d'assignar a la 
 		 * cua FIFO de mostres enviades (estat "SENDED") del següent laboratori en el 
-		 * circuit de rotacions. Abans però, caldrà establir el nou estat de la mostra 
-		 * i afegir la data d'enviment de la mateixa */
+		 * circuit de rotacions (el qual vé indexat per la variable "nextLaboratory". 
+		 * Abans però, caldrà establir el nou estat de la mostra i afegir la data 
+		 * d'enviment de la mateixa */
 		
 		s.setStatus(Status.SENDED);
 		s.setDateSended(date);
