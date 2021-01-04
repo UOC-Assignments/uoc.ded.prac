@@ -44,7 +44,7 @@ public class Trial4C19Impl implements Trial4C19 {
         this.mostActiveClinician = null;
         
         /* no cal inicialitzar numTrials, numLaboratories ni nextLaboratory ja 
-         * que són variables membres de classe Java 
+         * que són variables membres d'una classe de Java 
          * --> https://stackoverflow.com/questions/19131336/default-values-and-initialization-in-java
          */
     }

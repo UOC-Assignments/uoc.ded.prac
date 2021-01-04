@@ -8,7 +8,7 @@ public class Clinician {
 	private String name;
 	private String surname;
 	private String knowledgeArea;	
-	private LlistaEncadenada<Sample> samples;
+	private LlistaEncadenada<Sample> samples; //Llista encadenada de mostres de l'especialista
 
 	public Clinician(String idClinician, String name, String surname, String knowledgeArea) {
 		this.setIdClinician(idClinician);

@@ -11,7 +11,8 @@ public class Laboratory {
 	public Laboratory(String idLaboratory, String name) {
 		this.setIdLaboratory(idLaboratory);
 		this.setName(name);
-		this.samples = new CuaVectorImpl<Sample>(Trial4C19.MAX_SAMPLES_LAB);
+		//Cua FIFO de mostres pendents de processar per un laboratori
+		this.samples = new CuaVectorImpl<Sample>(Trial4C19.MAX_SAMPLES_LAB); 
 	}
 
 	public String getIdLaboratory() {
